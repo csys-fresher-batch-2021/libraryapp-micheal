@@ -9,16 +9,16 @@ import in.micheal.model.*;
  * @author mich2635
  *
  */
-public class AdminRegistration extends ArrayListDataBase{  
+public class UserService extends AdminDob{  
 	
 	/**
 	 * This method is used to register admin Id in user details
 	 * @param adminObj
 	 * @return
 	 */
-	public static String adminRegistration(UserDetails adminObj)
+	public static boolean adminRegistration(UserDetails adminObj)
 	{
-	String confirmation="ADMIN ID ALREADY EXISTS";
+	boolean confirmation=false;
 	boolean adminIdRepeatation=AdminRegistrationValidator.adminRegistrationValidator(adminObj);
 	{
 		
@@ -26,7 +26,7 @@ public class AdminRegistration extends ArrayListDataBase{
 		if(!adminIdRepeatation)
 		{
 			userDetails.add(adminObj);
-			confirmation="ADMIN ID ADDED SUCCESSFULLY";
+			confirmation=true;
 		}
 		return confirmation;
 	}

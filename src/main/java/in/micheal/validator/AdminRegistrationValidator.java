@@ -6,7 +6,7 @@ import in.micheal.service.*;
 import in.micheal.model.*;
 
 
-public class AdminRegistrationValidator extends ArrayListDataBase {
+public class AdminRegistrationValidator extends AdminDob {
 
 	public static boolean adminRegistrationValidator(UserDetails adminObj)
 	{

@@ -1,6 +1,7 @@
 package in.micheal.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -22,8 +23,8 @@ public class AdminRegistrationTest {
 		admin1.setUserName("ADMIN 1");
 		admin1.setUserId(9629);
 		admin1.setAdminPassword("9629");
-		String verification = AdminRegistration.adminRegistration(admin1);
-		assertEquals("ADMIN ID ADDED SUCCESSFULLY",verification);
+		boolean verification = UserService.adminRegistration(admin1);
+		assertTrue(verification);
 		
 		
 		
@@ -41,15 +42,15 @@ public class AdminRegistrationTest {
 		admin1.setUserName("ADMIN 1");
 		admin1.setUserId(9629);
 		admin1.setAdminPassword("9629");
-		String verification = AdminRegistration.adminRegistration(admin1);
-		assertEquals("ADMIN ID ADDED SUCCESSFULLY",verification);
+		boolean verification = UserService.adminRegistration(admin1);
+		assertTrue(verification);
 	
 		UserDetails admin2=new UserDetails();
 		admin2.setUserName("ADMIN 1");
 		admin2.setUserId(9629);
 		admin2.setAdminPassword("8870");
-		verification = AdminRegistration.adminRegistration(admin1);
-		assertEquals("ADMIN ID ALREADY EXISTS",verification);
+		verification = UserService.adminRegistration(admin1);
+		assertFalse(verification);
 
 }
 }
