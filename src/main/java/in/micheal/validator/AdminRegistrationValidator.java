@@ -5,8 +5,13 @@ import in.micheal.service.*;
 
 import in.micheal.model.*;
 
-
-public class AdminRegistrationValidator extends AdminDob {
+/**
+ * This methods validate Admin Registration id ,
+ * it returns false if admin id already exists
+ * @author mich2635
+ *
+ */
+public class AdminRegistrationValidator extends AdminBookDebtuserDob {
 
 	public static boolean adminRegistrationValidator(UserDetails adminObj)
 	{

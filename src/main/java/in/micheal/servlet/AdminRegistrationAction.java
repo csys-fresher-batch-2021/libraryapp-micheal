@@ -27,7 +27,7 @@ public class AdminRegistrationAction extends HttpServlet {
 	 admin.setUserId(adminId);
 	 admin.setAdminPassword(password);
 	 
-	 boolean confirmation=UserService.adminRegistration(admin);
+	 boolean confirmation=AdminRegistration.adminRegistration(admin);
 	 
 	 if(confirmation)
 	 {

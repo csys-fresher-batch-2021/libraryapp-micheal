@@ -9,7 +9,7 @@ import in.micheal.model.*;
  * @author mich2635
  *
  */
-public class UserService extends AdminDob{  
+public class AdminRegistration extends AdminBookDebtuserDob{  
 	
 	
 	/**
@@ -31,6 +31,6 @@ public class UserService extends AdminDob{
 	}
 	
 
-	
+
 	
 }
