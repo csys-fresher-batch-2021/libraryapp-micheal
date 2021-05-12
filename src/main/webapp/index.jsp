@@ -1,6 +1,6 @@
 
 
-<html>
+<html lang="en">
 <head>
 <title>MyApp</title>
 </head>
