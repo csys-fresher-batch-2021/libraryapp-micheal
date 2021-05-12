@@ -11,6 +11,7 @@ import in.micheal.model.*;
  */
 public class UserService extends AdminDob{  
 	
+	
 	/**
 	 * This method is used to register admin Id in user details
 	 * @param adminObj
@@ -20,9 +21,7 @@ public class UserService extends AdminDob{
 	{
 	boolean confirmation=false;
 	boolean adminIdRepeatation=AdminRegistrationValidator.adminRegistrationValidator(adminObj);
-	{
-		
-		}
+
 		if(!adminIdRepeatation)
 		{
 			userDetails.add(adminObj);
