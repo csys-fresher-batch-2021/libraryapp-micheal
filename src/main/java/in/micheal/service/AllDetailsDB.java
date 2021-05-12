@@ -4,10 +4,7 @@ import in.micheal.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminBookDebtuserDob {
-	public static final List<UserDetails> userDetails=new ArrayList<UserDetails>();
-	
-	
-	
-	
+public class AllDetailsDB {
+	public static final List<UserDetails> userDetails = new ArrayList<UserDetails>();
+
 }

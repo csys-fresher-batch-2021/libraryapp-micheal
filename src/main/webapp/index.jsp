@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>MyApp</title>
+<title>Library_Management</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
