@@ -25,7 +25,7 @@ public class AdminLoginAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		long adminId = Long.parseLong(request.getParameter("adminId"));
 		String password = request.getParameter("password");
-		boolean confirmation = AdminLoginJ.adminLogin(adminId, password);
+		boolean confirmation = AdminLogin.adminLogin(adminId, password);
 		if (confirmation) {
 			session.setAttribute("LOGGED_IN_ID", adminId);
 			response.sendRedirect("AdminView.jsp");

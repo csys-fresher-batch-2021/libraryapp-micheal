@@ -14,6 +14,7 @@ public class AdminLoginValidator {
 		for (UserDetails user : AllDetailsDB.userDetails) {
 			if (user.getUserId() == adminId && user.getAdminPassword().equals(password)) {
 				confirmation = true;
+				break;
 			}
 		}
 		return confirmation;

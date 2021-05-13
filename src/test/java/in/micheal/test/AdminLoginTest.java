@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import in.micheal.model.UserDetails;
-import in.micheal.service.AdminLoginJ;
+import in.micheal.service.AdminLogin;
 import in.micheal.service.AdminRegistration;
 
 public class AdminLoginTest {
@@ -20,7 +20,7 @@ public class AdminLoginTest {
 		admin1.setAdminPassword("4545");
 		AdminRegistration.adminRegistration(admin1);
 
-		boolean verification = AdminLoginJ.adminLogin(4545, "4545@libmanagement987");
+		boolean verification = AdminLogin.adminLogin(4545, "4545@libmanagement987");
 		assertTrue(verification);
 	}
 
@@ -33,7 +33,7 @@ public class AdminLoginTest {
 		admin2.setAdminPassword("1234");
 		AdminRegistration.adminRegistration(admin2);
 
-		boolean verification = AdminLoginJ.adminLogin(7878, "7878@libmanagement987");
+		boolean verification = AdminLogin.adminLogin(7878, "7878@libmanagement987");
 		assertFalse(verification);
 	}
 }

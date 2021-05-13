@@ -2,8 +2,8 @@ package in.micheal.service;
 
 import in.micheal.validator.AdminLoginValidator;
 
-public class AdminLoginJ {
-	private AdminLoginJ() {
+public class AdminLogin {
+	private AdminLogin() {
 		// default constructor
 	}
 
