@@ -11,6 +11,11 @@ import in.micheal.service.AllDetailsDB;
  *
  */
 public class AdminRegistrationValidator {
+	
+	private AdminRegistrationValidator()
+	{
+		//default constructor
+	}
 
 	public static boolean adminRegistrationValidator(UserDetails adminObj) {
 		boolean registration = false;
