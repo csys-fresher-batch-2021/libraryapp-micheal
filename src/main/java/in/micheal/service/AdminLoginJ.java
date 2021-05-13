@@ -2,12 +2,14 @@ package in.micheal.service;
 
 import in.micheal.validator.AdminLoginValidator;
 
-public class AdminLoginV {
-	private AdminLoginV() {
+public class AdminLoginJ {
+	private AdminLoginJ() {
 		// default constructor
 	}
+
 	/**
 	 * This methods return true if the log in credentials is true
+	 * 
 	 * @param adminId
 	 * @param password
 	 * @return
