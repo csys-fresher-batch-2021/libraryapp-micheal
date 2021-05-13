@@ -17,12 +17,18 @@
 			out.println("<font color='green'>" + infoMessage + "</font>");
 		}
 		%>
-		<form>
-			<strong><label>ENTER YOUR ID :</label></strong><br> <input
-				type="number" required placeholder="ID" min=10000 max=10000000
-				autofocus><br> <strong><label>ENTER
-					YOUR PASSWORD :</label></strong><br> 
-				<input type="password" required placeholder="PASSWORD"><br> <br>
+		<%
+		String errorMessage = request.getParameter("errorMessage");
+		if(errorMessage != null)
+		{
+			out.println("<font color ='red'>" +errorMessage + "</font>");
+		}
+		%>
+		<form action="AdminLoginAction" method="post">
+			<strong><label>ENTER YOUR ID :</label></strong><br> 
+			<input type="number" required placeholder="ID" name="adminId" min=10000 max=10000000 autofocus><br>
+			 <strong><label>ENTER YOUR PASSWORD :</label></strong><br> 
+				<input type="password" name="password" required placeholder="PASSWORD"><br> <br>
 			<input type="submit" value="SUBMIT" class="btn btn-primary">&nbsp;
 			<input type="reset" value="RESET" class="btn btn-danger">
 		</form>

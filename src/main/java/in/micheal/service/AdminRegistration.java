@@ -1,6 +1,6 @@
 package in.micheal.service;
 
-import in.micheal.validator.*;
+import in.micheal.validator.AdminRegistrationValidator;
 import in.micheal.model.*;
 
 /**
@@ -11,6 +11,10 @@ import in.micheal.model.*;
  *
  */
 public class AdminRegistration {
+
+	private AdminRegistration() {
+		// default constructor
+	}
 
 	/**
 	 * This method is used to register admin Id in user details

@@ -17,7 +17,7 @@
 			out.println("<font color='red'>" + errorMessage + "</font>");
 		}
 		%>
-	<form action="AdminRegistrationAction" method="get">
+	<form action="AdminRegistrationAction" method="post">
 	
 			<strong><label>ENTER YOUR ID :</label></strong><br>
 			<input type="number" required placeholder="ID" min=10000 max=10000000 autofocus name="adminId"><br>

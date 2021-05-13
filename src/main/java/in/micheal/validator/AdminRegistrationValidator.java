@@ -1,8 +1,7 @@
 package in.micheal.validator;
 
-import in.micheal.service.*;
-
-import in.micheal.model.*;
+import in.micheal.model.UserDetails;
+import in.micheal.service.AllDetailsDB;
 
 /**
  * This methods validate Admin Registration id , it returns false if admin id
