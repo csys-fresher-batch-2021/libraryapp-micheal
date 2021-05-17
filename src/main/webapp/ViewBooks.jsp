@@ -19,9 +19,9 @@
 		<caption>ALL AVAILABLE BOOKS</caption>
 			<thead>
 				<tr>
-					<th scope="col">S.no</th>
-					<th scope="col">BOOK NAME</th>
-					<th scope="col">BOOK QUANTITY</th>
+					<th> S.no</th>
+					<th>BOOK NAME</th>
+					<th>BOOK QUANTITY</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,9 +33,9 @@
 					i++;
 				%>
 				<tr>
-					<td scope="col"><%=i%></td>
-					<td scope="col"><%=obj.getBooksName()%></td>
-					<td scope="col"><%=obj.getBookQuantity()%></td>
+					<td><%=i%></td>
+					<td><%=obj.getBooksName()%></td>
+					<td><%=obj.getBookQuantity()%></td>
 				</tr>
 
 				<%

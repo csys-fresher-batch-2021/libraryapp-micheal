@@ -10,7 +10,7 @@ public class UserDetailsDAO {
 		// default constructor
 	}
 
-	public static final List<UserDetails> userDetails = new ArrayList<UserDetails>();
+	private static final List<UserDetails> userDetails = new ArrayList<>();
 
 	public static List<UserDetails> getUserDetails() {
 		return userDetails;
