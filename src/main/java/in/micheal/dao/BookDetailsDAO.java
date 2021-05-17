@@ -9,7 +9,7 @@ public class BookDetailsDAO {
 		// default constructor
 	}
 
-	public static final List<BookDetails> bookDetails = new ArrayList<BookDetails>();
+	private static final List<BookDetails> bookDetails = new ArrayList<BookDetails>();
 
 	static {
 		BookDetails book1 = new BookDetails();

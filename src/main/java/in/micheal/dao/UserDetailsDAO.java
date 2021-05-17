@@ -6,6 +6,9 @@ import java.util.List;
 import in.micheal.model.UserDetails;
 
 public class UserDetailsDAO {
+	UserDetailsDAO() {
+		// default constructor
+	}
 
 	public static final List<UserDetails> userDetails = new ArrayList<UserDetails>();
 
@@ -14,7 +17,7 @@ public class UserDetailsDAO {
 	}
 
 	/**
-	 * This method is used to add users to userDetails
+	 * This method is used to add users
 	 * 
 	 * @param userObj
 	 */
