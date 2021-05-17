@@ -1,20 +1,27 @@
 package in.micheal.service;
 
-import in.micheal.validator.AdminRegistrationValidator;
 import in.micheal.dao.UserDetailsDAO;
 import in.micheal.model.UserDetails;
+import in.micheal.validator.AdminLoginValidator;
+import in.micheal.validator.AdminRegistrationValidator;
 
-/**
- * This class extends ArrayListDataBase so that it can use userDetails ArrayList
- * which is present there
- * 
- * @author mich2635
- *
- */
-public class AdminRegistration {
+public class UserService {
 
-	private AdminRegistration() {
-		// default constructor
+	/**
+	 * This methods return true if the log in credentials is true
+	 * 
+	 * @param adminId
+	 * @param password
+	 * @return
+	 */
+	public static boolean adminLogin(long adminId, String password) {
+		boolean verification = false;
+		boolean confirmation = AdminLoginValidator.loginValidator(adminId, password);
+		if (confirmation) {
+			verification = true;
+		}
+		return verification;
+
 	}
 
 	/**

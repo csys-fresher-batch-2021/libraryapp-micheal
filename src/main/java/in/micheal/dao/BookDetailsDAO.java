@@ -1,6 +1,6 @@
 package in.micheal.dao;
 
-import in.micheal.model.BookDetails;
+import in.micheal.model.BookDetail;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +9,16 @@ public class BookDetailsDAO {
 		// default constructor
 	}
 
-	private static final List<BookDetails> bookDetails = new ArrayList<>();
+	private static final List<BookDetail> bookDetails = new ArrayList<>();
 
 	static {
-		BookDetails book1 = new BookDetails();
-		book1.setBookName("JAVA");
-		book1.setbookQuantity(20);
+		BookDetail book1 = new BookDetail();
+		book1.setName("JAVA");
+		book1.setQuantity(20);
 
-		BookDetails book2 = new BookDetails();
-		book2.setBookName("PYTHON");
-		book2.setbookQuantity(10);
+		BookDetail book2 = new BookDetail();
+		book2.setName("PYTHON");
+		book2.setQuantity(10);
 
 		bookDetails.add(book1);
 		bookDetails.add(book2);
@@ -29,7 +29,7 @@ public class BookDetailsDAO {
 	 * 
 	 * @return
 	 */
-	public static List<BookDetails> getBookDetails() {
+	public static List<BookDetail> getBookDetails() {
 		return bookDetails;
 	}
 

@@ -1,22 +1,22 @@
 package in.micheal.model;
 
-public class BookDetails {
+public class BookDetail {
 	private String bookName;
 	private int bookQuantity;
 
-	public void setBookName(String bookName) {
+	public void setName(String bookName) {
 		this.bookName = bookName;
 	}
 
-	public void setbookQuantity(int bookQuantity) {
+	public void setQuantity(int bookQuantity) {
 		this.bookQuantity = bookQuantity;
 	}
 
-	public String getBooksName() {
+	public String getName() {
 		return bookName;
 	}
 
-	public int getBookQuantity() {
+	public int getQuantity() {
 		return bookQuantity;
 	}
 

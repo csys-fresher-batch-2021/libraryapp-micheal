@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import in.micheal.model.UserDetails;
-import in.micheal.service.AdminRegistration;
+import in.micheal.service.UserService;
 
 /**
  * Servlet implementation class AdminRegistrationAction
@@ -27,7 +27,7 @@ public class AdminRegistrationAction extends HttpServlet {
 		admin.setUserId(adminId);
 		admin.setAdminPassword(password);
 
-		boolean confirmation = AdminRegistration.adminRegistration(admin);
+		boolean confirmation = UserService.adminRegistration(admin);
 
 		if (confirmation) {
 			String message = "ADMIN ID ADDED SUCCESSFULLY";

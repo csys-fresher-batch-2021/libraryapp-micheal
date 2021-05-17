@@ -2,7 +2,7 @@ package in.micheal.servlet;
 
 import java.io.IOException;
 
-import in.micheal.service.AdminLogin;
+import in.micheal.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class AdminLoginAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		long adminId = Long.parseLong(request.getParameter("adminId"));
 		String password = request.getParameter("password");
-		boolean confirmation = AdminLogin.adminLogin(adminId, password);
+		boolean confirmation = UserService.adminLogin(adminId, password);
 		if (confirmation) {
 			session.setAttribute("LOGGED_IN_ID", adminId);
 			response.sendRedirect("AdminView.jsp");

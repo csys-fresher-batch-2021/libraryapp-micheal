@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="in.micheal.dao.BookDetailsDAO"%>
-<%@ page import="in.micheal.model.BookDetails"%>
+<%@ page import="in.micheal.model.BookDetail"%>
 <%@page import="java.util.List"%>
 
 <!DOCTYPE html>
@@ -27,15 +27,15 @@
 			<tbody>
 
 				<%
-				List<BookDetails> bookDetails = BookDetailsDAO.getBookDetails();
-				int i = 0;
-				for (BookDetails obj : bookDetails) {
-					i++;
+				List<BookDetail> bookDetails = BookDetailsDAO.getBookDetails();
+										int i = 0;
+										for (BookDetail obj : bookDetails) {
+											i++;
 				%>
 				<tr>
 					<td><%=i%></td>
-					<td><%=obj.getBooksName()%></td>
-					<td><%=obj.getBookQuantity()%></td>
+					<td><%=obj.getName()%></td>
+					<td><%=obj.getQuantity()%></td>
 				</tr>
 
 				<%

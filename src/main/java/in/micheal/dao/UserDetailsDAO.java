@@ -6,7 +6,7 @@ import java.util.List;
 import in.micheal.model.UserDetails;
 
 public class UserDetailsDAO {
-	UserDetailsDAO() {
+	private UserDetailsDAO() {
 		// default constructor
 	}
 
