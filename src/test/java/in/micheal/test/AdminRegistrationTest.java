@@ -1,6 +1,6 @@
 package in.micheal.test;
 
-import in.micheal.service.*;
+import in.micheal.service.AdminRegistration;
 
 import in.micheal.model.*;
 

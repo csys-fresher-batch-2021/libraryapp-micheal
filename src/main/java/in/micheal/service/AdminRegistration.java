@@ -1,7 +1,8 @@
 package in.micheal.service;
 
-import in.micheal.validator.*;
-import in.micheal.model.*;
+import in.micheal.validator.AdminRegistrationValidator;
+import in.micheal.dao.UserDetailsDAO;
+import in.micheal.model.UserDetails;
 
 /**
  * This class extends ArrayListDataBase so that it can use userDetails ArrayList
@@ -11,6 +12,10 @@ import in.micheal.model.*;
  *
  */
 public class AdminRegistration {
+
+	private AdminRegistration() {
+		// default constructor
+	}
 
 	/**
 	 * This method is used to register admin Id in user details
@@ -23,7 +28,7 @@ public class AdminRegistration {
 		boolean adminIdRepeatation = AdminRegistrationValidator.adminRegistrationValidator(adminObj);
 
 		if (!adminIdRepeatation) {
-			AllDetailsDB.userDetails.add(adminObj);
+			UserDetailsDAO.addUser(adminObj);
 			confirmation = true;
 		}
 		return confirmation;

@@ -1,8 +1,7 @@
 package in.micheal.validator;
 
-import in.micheal.service.*;
-
-import in.micheal.model.*;
+import in.micheal.dao.UserDetailsDAO;
+import in.micheal.model.UserDetails;
 
 /**
  * This methods validate Admin Registration id , it returns false if admin id
@@ -13,10 +12,14 @@ import in.micheal.model.*;
  */
 public class AdminRegistrationValidator {
 
+	private AdminRegistrationValidator() {
+		// default constructor
+	}
+
 	public static boolean adminRegistrationValidator(UserDetails adminObj) {
 		boolean registration = false;
 		if (adminObj.getUserId() > 1000) {
-			for (UserDetails admin : AllDetailsDB.userDetails) {
+			for (UserDetails admin : UserDetailsDAO.getUserDetails()) {
 				if (admin.getUserId() == adminObj.getUserId()) {
 					registration = true;
 					break;

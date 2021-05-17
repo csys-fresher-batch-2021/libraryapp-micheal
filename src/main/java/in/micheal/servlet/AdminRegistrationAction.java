@@ -6,8 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import in.micheal.model.*;
-import in.micheal.service.*;
+import in.micheal.model.UserDetails;
+import in.micheal.service.AdminRegistration;
 
 /**
  * Servlet implementation class AdminRegistrationAction
