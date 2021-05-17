@@ -15,7 +15,7 @@ public class UserServiceValidator {
 	 * @param password
 	 * @return
 	 */
-	public static boolean AdminloginValidator(long adminId, String password) {
+	public static boolean adminloginValidator(long adminId, String password) {
 		boolean confirmation = false;
 		for (UserDetails user : UserDetailsDAO.getUserDetails()) {
 			if (user.getUserId() == adminId && user.getAdminPassword().equals(password)) {

@@ -18,7 +18,7 @@ public class UserService {
 	 */
 	public static boolean adminLogin(long adminId, String password) {
 		boolean verification = false;
-		boolean confirmation = UserServiceValidator.AdminloginValidator(adminId, password);
+		boolean confirmation = UserServiceValidator.adminloginValidator(adminId, password);
 		if (confirmation) {
 			verification = true;
 		}
