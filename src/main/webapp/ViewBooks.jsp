@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -19,9 +19,9 @@
 		<caption>ALL AVAILABLE BOOKS</caption>
 			<thead>
 				<tr>
-					<th>S.no</th>
-					<th>BOOK NAME</th>
-					<th>BOOK QUANTITY</th>
+					<th scope="col">S.no</th>
+					<th scope="col">BOOK NAME</th>
+					<th scope="col">BOOK QUANTITY</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,9 +33,9 @@
 					i++;
 				%>
 				<tr>
-					<td><%=i%></td>
-					<td><%=obj.getBooksName()%></td>
-					<td><%=obj.getBookQuantity()%></td>
+					<td scope="col"><%=i%></td>
+					<td scope="col"><%=obj.getBooksName()%></td>
+					<td scope="col"><%=obj.getBookQuantity()%></td>
 				</tr>
 
 				<%
