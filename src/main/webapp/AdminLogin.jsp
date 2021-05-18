@@ -24,7 +24,7 @@
 			out.println("<font color ='red'>" +errorMessage + "</font>");
 		}
 		%>
-		<form action="AdminLoginAction" method="post">
+		<form action="AdminLoginAction" method="post" class="">
 			<strong><label>ENTER YOUR ID :</label></strong><br> 
 			<input type="number" required placeholder="ID" name="adminId" min=10000 max=10000000 autofocus><br>
 			 <strong><label>ENTER YOUR PASSWORD :</label></strong><br> 
