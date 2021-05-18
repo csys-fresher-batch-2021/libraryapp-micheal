@@ -6,6 +6,10 @@ import in.micheal.validator.BookValidator;
 
 public class AdminService {
 
+	private AdminService() {
+		// default constructor
+	}
+
 	/**
 	 * This method is used to upload books in Admin Side
 	 * 
