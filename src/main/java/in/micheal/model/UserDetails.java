@@ -9,7 +9,7 @@ package in.micheal.model;
 public class UserDetails {
 	private String userName;
 	private long userId;
-	private long password;
+	private String password;
 	private String adminPassword;
 
 	public void setUserName(String Name) {
@@ -20,7 +20,7 @@ public class UserDetails {
 		userId = ID;
 	}
 
-	public void setPassword(long userPassword) {
+	public void setPassword(String userPassword) {
 		password = userPassword;
 	}
 
@@ -41,7 +41,7 @@ public class UserDetails {
 		return userId;
 	}
 
-	public long getPassword() {
+	public String getPassword() {
 		return password;
 	}
 }

@@ -13,7 +13,6 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>Welcome To Library Management</h3>
 		<h3>ALL AVAILABLE BOOKS</h3>
 		<table class="table table-dark table-hover">
 			<caption>ALL AVAILABLE BOOKS</caption>

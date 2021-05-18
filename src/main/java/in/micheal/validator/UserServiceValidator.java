@@ -32,11 +32,11 @@ public class UserServiceValidator {
 	 * @param adminObj
 	 * @return
 	 */
-	public static boolean adminRegistrationValidator(UserDetails adminObj) {
+	public static boolean registrationValidator(UserDetails Obj) {
 		boolean registration = false;
-		if (adminObj.getUserId() > 1000) {
-			for (UserDetails admin : UserDetailsDAO.getUserDetails()) {
-				if (admin.getUserId() == adminObj.getUserId()) {
+		if (Obj.getUserId() > 1000) {
+			for (UserDetails objV : UserDetailsDAO.getUserDetails()) {
+				if (objV.getUserId() == Obj.getUserId()) {
 					registration = true;
 					break;
 				}
