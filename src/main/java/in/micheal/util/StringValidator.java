@@ -5,9 +5,9 @@ public class StringValidator {
 		// default constructor
 	}
 
-	public static void lengthvalidator(String input) throws Exception {
+	public static void lengthvalidator(String input) {
 		if (input.length() < 4) {
-			throw new Exception("PASSWORD LENGTH MUST BE GREATER THAN 4 DIGITS");
+			throw new RuntimeException("PASSWORD LENGTH MUST BE GREATER THAN 4 DIGITS");
 		}
 	}
 }
