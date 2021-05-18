@@ -16,11 +16,11 @@
 			out.println("<font color='green'>" + Message + "</font>");
 		}
 		%>
-		<form>
+		<form action="UserLoginAction" method="post">
 		<strong><label>ENTER YOUR USER ID</label></strong><br>
-		<input type="number" required min=10000 max=10000000 autofocus><br>
+		<input type="number" required min=10000 max=10000000 autofocus name="userId"><br>
 		<strong><label>ENTER YOUR PASSWORD</label></strong><br>
-		<input type="password" required ><br><br>
+		<input type="password" required name="password"><br><br>
 		<button class="btn btn-primary">SUBMIT</button> <input type="reset" class="btn btn-danger">
 		</form><br><br>
 		<a href=UserRegistration.jsp>REGISTER</a>

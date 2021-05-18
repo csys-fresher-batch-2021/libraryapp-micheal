@@ -23,9 +23,11 @@ public class UserRegistrationAction extends HttpServlet {
 		try {
 			long userId = Long.parseLong(request.getParameter("userId"));
 			String password = request.getParameter("password");
+			String userName=request.getParameter("userName");
 			UserDetails obj = new UserDetails();
 			obj.setUserId(userId);
 			obj.setPassword(password);
+			obj.setUserName(userName);
 			boolean confirmation = UserService.userRegistration(obj);
 			if (confirmation) {
 				String msg = "REGISTRATION SUCCESSFULL";
