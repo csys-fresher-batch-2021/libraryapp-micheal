@@ -43,15 +43,16 @@ public class UserService {
 		}
 		return confirmation;
 	}
-	
+
 	/**
 	 * This method is used to register users
+	 * 
 	 * @param userObj
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 
-	public static boolean userRegistration(UserDetails userObj) throws Exception {
+	public static boolean userRegistration(UserDetails userObj) {
 		boolean confirmation = false;
 		StringValidator.lengthvalidator(userObj.getPassword());
 		boolean userIdRepetation = UserServiceValidator.registrationValidator(userObj);
