@@ -16,13 +16,12 @@ import in.micheal.service.ViewBookByName;
 @WebServlet("/ViewBookByNameAction")
 public class ViewBookByNameAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static BookDetail obj = null;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		obj = ViewBookByName.bookName(request.getParameter("bookName"));
+		BookDetail obj = ViewBookByName.bookName(request.getParameter("bookName"));
 
 		if (obj != null) {
 			int bookQuantity = obj.getQuantity();
