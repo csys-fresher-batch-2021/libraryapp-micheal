@@ -21,10 +21,10 @@ public class UserRegistrationAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			long UserId = Long.parseLong(request.getParameter("userId"));
+			long userId = Long.parseLong(request.getParameter("userId"));
 			String password = request.getParameter("password");
 			UserDetails obj = new UserDetails();
-			obj.setUserId(UserId);
+			obj.setUserId(userId);
 			obj.setPassword(password);
 			boolean confirmation = UserService.userRegistration(obj);
 			if (confirmation) {
