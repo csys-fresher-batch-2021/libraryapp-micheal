@@ -11,19 +11,6 @@ public class BookDetailsDAO {
 
 	private static final List<BookDetail> bookDetails = new ArrayList<>();
 
-	static {
-		BookDetail book1 = new BookDetail();
-		book1.setName("JAVA");
-		book1.setQuantity(20);
-
-		BookDetail book2 = new BookDetail();
-		book2.setName("PYTHON");
-		book2.setQuantity(10);
-
-		bookDetails.add(book1);
-		bookDetails.add(book2);
-	}
-
 	/**
 	 * This method is used to get Book Details
 	 * 
@@ -31,6 +18,16 @@ public class BookDetailsDAO {
 	 */
 	public static List<BookDetail> getBookDetails() {
 		return bookDetails;
+	}
+
+	public static void addBooks(BookDetail obj) {
+		bookDetails.add(obj);
+	}
+
+	public static void updateBooks(BookDetail obj, int bookIndex) {
+		BookDetail bookObj = bookDetails.get(bookIndex);
+		bookObj.setQuantity(bookObj.getQuantity() + obj.getQuantity());
+
 	}
 
 }

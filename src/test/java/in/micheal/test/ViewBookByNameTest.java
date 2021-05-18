@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import in.micheal.model.BookDetail;
+import in.micheal.service.AdminService;
 import in.micheal.service.ViewBookByName;
 
 public class ViewBookByNameTest {
@@ -14,7 +15,10 @@ public class ViewBookByNameTest {
 	 */
 	@Test
 	public void validDetails() {
-		BookDetail obj = null;
+		BookDetail obj = new BookDetail();
+		obj.setName("JAVA");
+		obj.setQuantity(20);
+		AdminService.uploadBooks(obj);
 
 		obj = ViewBookByName.bookName("JAVA");
 
