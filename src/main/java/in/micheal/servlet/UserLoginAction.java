@@ -22,9 +22,7 @@ public class UserLoginAction extends HttpServlet {
 
 		long userId = Long.parseLong(request.getParameter("userId"));
 		String password = request.getParameter("password");
-		System.out.println(userId);
-		System.out.println(password);
-		boolean confirmation = UserService.UserLogin(userId, password);
+		boolean confirmation = UserService.userLogin(userId, password);
 		if (confirmation) {
 			String msg = "LOGIN SUCCESSFULL";
 			response.sendRedirect("UserView.jsp?msg=" + msg);

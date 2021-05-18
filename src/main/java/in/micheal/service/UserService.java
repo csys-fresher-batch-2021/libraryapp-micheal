@@ -17,7 +17,7 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public static boolean UserLogin(long userId, String password) {
+	public static boolean userLogin(long userId, String password) {
 		boolean verification = false;
 		boolean confirmation = UserServiceValidator.userLoginValidator(userId, password);
 		if (confirmation) {
