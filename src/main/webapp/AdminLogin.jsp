@@ -10,7 +10,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>ADMIN LOGIN</h3>
-
 		<%
 		String infoMessage = request.getParameter("infoMessage");
 		if (infoMessage != null) {

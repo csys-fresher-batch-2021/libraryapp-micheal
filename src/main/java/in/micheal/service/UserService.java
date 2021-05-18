@@ -2,6 +2,7 @@ package in.micheal.service;
 
 import in.micheal.dao.UserDetailsDAO;
 import in.micheal.model.UserDetails;
+import in.micheal.util.StringValidator;
 import in.micheal.validator.UserServiceValidator;
 
 public class UserService {
@@ -34,7 +35,7 @@ public class UserService {
 	 */
 	public static boolean adminRegistration(UserDetails adminObj) {
 		boolean confirmation = false;
-		boolean adminIdRepeatation = UserServiceValidator.adminRegistrationValidator(adminObj);
+		boolean adminIdRepeatation = UserServiceValidator.registrationValidator(adminObj);
 
 		if (!adminIdRepeatation) {
 			UserDetailsDAO.addUser(adminObj);
@@ -43,4 +44,23 @@ public class UserService {
 		return confirmation;
 	}
 
+	/**
+	 * This method is used to register users
+	 * 
+	 * @param userObj
+	 * @return
+	 * @throws Exception
+	 */
+
+	public static boolean userRegistration(UserDetails userObj) {
+		boolean confirmation = false;
+		StringValidator.lengthvalidator(userObj.getPassword());
+		boolean userIdRepetation = UserServiceValidator.registrationValidator(userObj);
+		if (!userIdRepetation) {
+			UserDetailsDAO.addUser(userObj);
+			confirmation = true;
+		}
+		return confirmation;
+
+	}
 }
