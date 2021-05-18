@@ -16,7 +16,7 @@ import in.micheal.service.ViewBookByName;
 @WebServlet("/ViewBookByNameAction")
 public class ViewBookByNameAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	BookDetail obj = null;
+	private static BookDetail obj = null;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
