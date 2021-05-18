@@ -45,4 +45,22 @@ public class UserServiceValidator {
 
 		return registration;
 	}
+
+	/**
+	 * This method validates user Login credentials
+	 * 
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public static boolean userLoginValidator(long userId, String password) {
+		boolean confirmation = false;
+		for (UserDetails user : UserDetailsDAO.getUserDetails()) {
+			if (user.getUserId() == userId && user.getPassword().equals(password)) {
+				confirmation = true;
+				break;
+			}
+		}
+		return confirmation;
+	}
 }

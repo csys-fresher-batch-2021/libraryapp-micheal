@@ -18,6 +18,8 @@
 		%>
 		
 			<form action="UserRegistrationAction" method="post">
+			<strong><label>ENTER YOU NAME</label></strong><br>
+			<input type="text" required name="userName"><br>
 		<strong><label>ENTER YOUR USER ID</label></strong><br>
 		<input type="number" required min=10000 max=10000000 autofocus name="userId"><br>
 		<strong><label>ENTER YOUR PASSWORD</label></strong><br>
