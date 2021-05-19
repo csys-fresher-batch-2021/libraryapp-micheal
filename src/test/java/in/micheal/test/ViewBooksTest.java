@@ -13,13 +13,14 @@ public class ViewBooksTest {
 
 	@Test
 	public void test() {
+		BookDetailsDAO.deleteAllBooks();
 		BookDetail obj = new BookDetail();
-		obj.setName("JAVA");
+		obj.setName("ENGLISH");
 		obj.setQuantity(20);
 		AdminService.uploadBooks(obj);
 
 		BookDetail obj2 = new BookDetail();
-		obj2.setName("PYTHON");
+		obj2.setName("TAMIL");
 		obj2.setQuantity(20);
 		AdminService.uploadBooks(obj2);
 

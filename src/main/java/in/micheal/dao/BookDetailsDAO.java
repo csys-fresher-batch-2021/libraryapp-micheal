@@ -24,10 +24,20 @@ public class BookDetailsDAO {
 		bookDetails.add(obj);
 	}
 
-	public static void updateBooks(BookDetail obj, int bookIndex) {
+	public static void addBookQuantity(BookDetail obj, int bookIndex) {
 		BookDetail bookObj = bookDetails.get(bookIndex);
 		bookObj.setQuantity(bookObj.getQuantity() + obj.getQuantity());
 
+	}
+
+	public static void subBookQuantity(BookDetail obj, int bookIndex) {
+		BookDetail bookObj = bookDetails.get(bookIndex);
+		bookObj.setQuantity(bookObj.getQuantity() - obj.getQuantity());
+
+	}
+
+	public static void deleteAllBooks() {
+		bookDetails.clear();
 	}
 
 }
