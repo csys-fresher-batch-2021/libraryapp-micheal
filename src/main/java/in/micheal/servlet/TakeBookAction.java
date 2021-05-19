@@ -24,8 +24,8 @@ public class TakeBookAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession LoggedInUser = request.getSession();
-		long loggedInUsername = (long) LoggedInUser.getAttribute("LOOGGED_IN_USER");
+		HttpSession loggedInUser = request.getSession();
+		long loggedInUsername = (long) loggedInUser.getAttribute("LOOGGED_IN_USER");
 		String bookName = request.getParameter("bookName").toUpperCase();
 		int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
 		BookDetail book = new BookDetail();

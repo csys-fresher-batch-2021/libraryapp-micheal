@@ -21,7 +21,7 @@ public class UserLoginAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession LoggedInUser = request.getSession();
+		HttpSession loggedInUser = request.getSession();
 
 		long userId = Long.parseLong(request.getParameter("userId"));
 		String password = request.getParameter("password");
@@ -29,7 +29,7 @@ public class UserLoginAction extends HttpServlet {
 		if (confirmation) {
 			String msg = "LOGIN SUCCESSFULL";
 			response.sendRedirect("UserView.jsp?msg=" + msg);
-			LoggedInUser.setAttribute("LOOGGED_IN_USER", userId);
+			loggedInUser.setAttribute("LOOGGED_IN_USER", userId);
 		} else {
 			String msg = "INVALID LOGIN CREDENTIALS";
 			response.sendRedirect("UserLogin.jsp?msg=" + msg);
