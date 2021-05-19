@@ -27,4 +27,8 @@ public class DebtUserDetailsDAO {
 	public static List<DebtUserDetail> getDebtUserDetail() {
 		return debtUserDetails;
 	}
+	public static void subDebtQuantity(int quntity,int index) {
+		debtUserDetails.get(index).setTekenBookQuantity(quntity);
+		
+	}
 }

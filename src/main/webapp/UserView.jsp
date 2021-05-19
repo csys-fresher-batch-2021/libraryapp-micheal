@@ -33,11 +33,11 @@
 	</form>
 	
 	<%} else  {%>
-	<form>
+	<form action="ReturnBookAction" method="post">
 	<label>ENTER THE RETURNING BOOK NAME</label><br>
-	<input type="text" required placeholder="BOOK NAME"><br>
+	<input type="text" required placeholder="BOOK NAME" name="bookName"><br>
 	<label>ENTER THE RETURNING BOOK QUANTITY</label><br>
-	<input type="number" required placeholder="BOOK QUANTITY"><br><br>
+	<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity"><br><br>
 	<button class="btn btn-info">SUBMIT</button>&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
 	</form>
 	
