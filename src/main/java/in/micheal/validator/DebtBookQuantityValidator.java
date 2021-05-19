@@ -8,8 +8,6 @@ public class DebtBookQuantityValidator {
 	}
 
 	public static int validateBookQuantity(int bookQuantity, int debtBookIndex) {
-		int remainingQuantity = (DebtUserDetailsDAO.getDebtUserDetail().get(debtBookIndex).getTekenBookQuantity())
-				- bookQuantity;
-		return remainingQuantity;
+		return (DebtUserDetailsDAO.getDebtUserDetail().get(debtBookIndex).getTekenBookQuantity()) - bookQuantity;
 	}
 }
