@@ -21,6 +21,8 @@ public class AdminLoginAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		
 		long adminId = Long.parseLong(request.getParameter("adminId"));
 		String password = request.getParameter("password");
 		boolean confirmation = UserService.adminLogin(adminId, password);

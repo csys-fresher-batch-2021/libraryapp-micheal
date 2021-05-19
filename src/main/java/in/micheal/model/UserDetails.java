@@ -12,12 +12,12 @@ public class UserDetails {
 	private String password;
 	private String adminPassword;
 
-	public void setUserName(String Name) {
-		userName = Name;
+	public void setUserName(String name) {
+		userName = name;
 	}
 
-	public void setUserId(long ID) {
-		userId = ID;
+	public void setUserId(long id) {
+		userId = id;
 	}
 
 	public void setPassword(String userPassword) {
