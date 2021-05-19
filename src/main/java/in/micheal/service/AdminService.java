@@ -23,7 +23,7 @@ public class AdminService {
 			BookDetailsDAO.addBooks(obj);
 			msg = "BOOK UPLOADED SUCCESSFULLY";
 		} else {
-			BookDetailsDAO.updateBooks(obj, bookIndex);
+			BookDetailsDAO.addBookQuantity(obj, bookIndex);
 			msg = "BOOK UPDATED SUCCESSFULLY";
 		}
 		return msg;

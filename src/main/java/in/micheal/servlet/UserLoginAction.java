@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.micheal.service.UserService;
 
@@ -20,12 +21,15 @@ public class UserLoginAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession LoggedInUser = request.getSession();
+
 		long userId = Long.parseLong(request.getParameter("userId"));
 		String password = request.getParameter("password");
 		boolean confirmation = UserService.userLogin(userId, password);
 		if (confirmation) {
 			String msg = "LOGIN SUCCESSFULL";
 			response.sendRedirect("UserView.jsp?msg=" + msg);
+			LoggedInUser.setAttribute("LOOGGED_IN_USER", userId);
 		} else {
 			String msg = "INVALID LOGIN CREDENTIALS";
 			response.sendRedirect("UserLogin.jsp?msg=" + msg);
