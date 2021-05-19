@@ -67,7 +67,7 @@ public class TakeBookTest {
 
 		BookDetail takingBook = new BookDetail();
 		takingBook.setName("MATHS");
-		takingBook.setQuantity(50);
+		takingBook.setQuantity(200);
 
 		String confirmation = TakeOrReturnBook.takeBook(takingBook, null);
 		assertEquals("SORRY INSUFFICIENT BOOK", confirmation);
