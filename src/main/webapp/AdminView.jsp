@@ -3,6 +3,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="in.micheal.dao.BookDetailsDAO"%>
 <%@ page import="in.micheal.model.BookDetail"%>
+<%@ page import="in.micheal.dao.DebtUserDetailsDAO" %>
+<%@ page import="in.micheal.model.DebtUserDetail" %>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +16,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Welcome To Library Management</h3>
-		<h3>ALL AVAILABLE BOOKS</h3>
+		<h4>ALL AVAILABLE BOOKS</h4>
 		<table class="table table-dark table-hover">
 			<caption>ALL AVAILABLE BOOKS</caption>
 			<thead>
@@ -44,7 +46,7 @@
 			</tbody>
 		</table><br>
 		<form action="UploadBooksAction" method="post">
-		<h2>UPLOAD BOOKS</h2>
+		<h4>UPLOAD BOOKS</h4>
 		<%
 		String msg=request.getParameter("message");
 		if(msg!=null)
@@ -54,7 +56,39 @@
 		<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity" min=1 max=100000><br><br>
 		<button class="btn btn-danger">SUBMIT</button>
 		
-		</form>
+		</form><br><br>
+		<h4>ALL DEBT USERS</h4>
+		<table class="table table-dark table-hover">
+		<caption>ALL DEBT USERS</caption>
+		<thead>
+		<tr>
+					<th>S.no</th>
+					<th>USER ID</th>
+					<th>TAKEN BOOK</th>
+					<th>TAKEN QUANTITY</th>
+					<th>TAKEN DATE</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% 
+				List<DebtUserDetail> debtUserDetails=DebtUserDetailsDAO.getDebtUserDetail();
+				int j=0;
+				for(DebtUserDetail debtUser:debtUserDetails){
+					j++;
+				%>
+				<tr>
+				<td><%=j %></td>
+				<td><%=debtUser.getDebtUserId() %></td>
+				<td><%=debtUser.getTakenBook() %></td>
+				<td><%=debtUser.getTekenBookQuantity() %></td>
+				<td><%=debtUser.getTakenDate() %></td>
+				</tr>
+				
+				<%} %>
+				</tbody>
+		
+		
+		</table>
 		
 	</main>
 </body>

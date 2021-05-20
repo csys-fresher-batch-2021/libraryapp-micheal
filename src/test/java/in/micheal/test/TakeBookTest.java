@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import in.micheal.model.BookDetail;
 import in.micheal.service.AdminService;
-import in.micheal.service.TakeOrReturnBook;
+import in.micheal.service.CustomerService;
 
 public class TakeBookTest {
 
@@ -27,7 +27,7 @@ public class TakeBookTest {
 		takingBook.setName("MATHS");
 		takingBook.setQuantity(10);
 
-		String confirmation = TakeOrReturnBook.takeBook(takingBook, null);
+		String confirmation = CustomerService.takeBook(takingBook, null);
 		assertEquals("BOOK TAKEN SUCCESSFULLY", confirmation);
 
 	}
@@ -49,7 +49,7 @@ public class TakeBookTest {
 		takingBook.setName("lol");
 		takingBook.setQuantity(10);
 
-		String confirmation = TakeOrReturnBook.takeBook(takingBook, null);
+		String confirmation = CustomerService.takeBook(takingBook, null);
 		assertEquals("SORRY BOOK NOT AVAILABLE", confirmation);
 	}
 
@@ -69,7 +69,7 @@ public class TakeBookTest {
 		takingBook.setName("MATHS");
 		takingBook.setQuantity(200);
 
-		String confirmation = TakeOrReturnBook.takeBook(takingBook, null);
+		String confirmation = CustomerService.takeBook(takingBook, null);
 		assertEquals("SORRY INSUFFICIENT BOOK", confirmation);
 	}
 }
