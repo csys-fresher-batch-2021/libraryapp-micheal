@@ -36,24 +36,29 @@ public class AdminRegistrationTest {
 	@Test
 	public void registeringwithTwoSameUserId() {
 
+		// Adding Admin 1
+		UserDetails admin1 = new UserDetails();
+		admin1.setUserName("ADMIN 1");
+		admin1.setUserId(8870);
+		admin1.setAdminPassword("8870");
+		boolean verification = false;
 		try {
-			// Adding Admin 1
-			UserDetails admin1 = new UserDetails();
-			admin1.setUserName("ADMIN 1");
-			admin1.setUserId(8870);
-			admin1.setAdminPassword("8870");
-			boolean verification = UserService.adminRegistration(admin1);
-			assertTrue(verification);
-
-			UserDetails admin2 = new UserDetails();
-			admin2.setUserName("ADMIN 1");
-			admin2.setUserId(8870);
-			admin2.setAdminPassword("8870");
 			verification = UserService.adminRegistration(admin1);
-			assertFalse(verification);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		assertTrue(verification);
+
+		UserDetails admin2 = new UserDetails();
+		admin2.setUserName("ADMIN 1");
+		admin2.setUserId(8870);
+		admin2.setAdminPassword("8870");
+		try {
+			verification = UserService.adminRegistration(admin1);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		assertFalse(verification);
 
 	}
 
