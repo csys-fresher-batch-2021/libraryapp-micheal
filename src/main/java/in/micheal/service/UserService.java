@@ -1,6 +1,8 @@
 package in.micheal.service;
 
 import in.micheal.dao.UserDetailsDAO;
+import in.micheal.exception.InValidPasswordException;
+import in.micheal.exception.UserIdException;
 import in.micheal.model.UserDetails;
 import in.micheal.validator.PasswordValidator;
 import in.micheal.validator.UserIdValidator;
@@ -51,7 +53,7 @@ public class UserService {
 	 * @return
 	 * @throws Throwable 
 	 */
-	public static boolean adminRegistration(UserDetails adminObj) throws Throwable {
+	public static boolean adminRegistration(UserDetails adminObj) throws UserIdException {
 		boolean confirmation = false;
 		UserIdValidator.validateUserId(adminObj.getUserId());
 		boolean adminIdRepeatation = UserServiceValidator.registrationValidator(adminObj);
@@ -72,7 +74,7 @@ public class UserService {
 	 * @throws Exception
 	 */
 
-	public static boolean userRegistration(UserDetails userObj) throws Throwable {
+	public static boolean userRegistration(UserDetails userObj) throws UserIdException, InValidPasswordException {
 		boolean confirmation = false;
 		UserIdValidator.validateUserId(userObj.getUserId());
 		PasswordValidator.validatePassword(userObj.getPassword());
