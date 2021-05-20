@@ -22,7 +22,7 @@ public class UserRegistrationTest {
 			confirmation = UserService.userRegistration(obj);
 
 			assertTrue(confirmation);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			// Auto-generated catch block
 		}
 	}
@@ -48,7 +48,7 @@ public class UserRegistrationTest {
 			confirmation = UserService.userRegistration(obj2);
 
 			assertFalse(confirmation);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			// Auto-generated catch block
 		}
 
@@ -64,11 +64,28 @@ public class UserRegistrationTest {
 			obj.setPassword(password);
 
 			UserService.userRegistration(obj);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			String msg = e.getMessage();
-			assertEquals("PASSWORD LENGTH MUST BE GREATER THAN 4 DIGITS",msg);
+			assertEquals("PASSWORD LENGTH MUST BE GREATER THAN 4 DIGITS", msg);
 
 		}
 	}
 
+	@Test
+	public void smallUserIdCheck() {
+		try {
+			UserDetails obj = new UserDetails();
+			long userId = 121;
+			String password = "878";
+			obj.setUserId(userId);
+			obj.setPassword(password);
+
+			UserService.userRegistration(obj);
+		} catch (Throwable e) {
+			String msg = e.getMessage();
+			assertEquals("INVALID USER ID", msg);
+
+		}
+
+	}
 }

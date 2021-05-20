@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
-import in.micheal.service.TakeOrReturnBook;
+import in.micheal.service.CustomerService;
 
 /**
  * Servlet implementation class ReturnBookAction
@@ -29,7 +29,7 @@ public class ReturnBookAction extends HttpServlet {
 		BookDetail book = new BookDetail();
 		DebtUserDetail debtUser = new DebtUserDetail();
 
-		String bookName = request.getParameter("bookName");
+		String bookName = request.getParameter("bookName").toUpperCase();
 		int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
 
 		book.setName(bookName);
@@ -39,7 +39,7 @@ public class ReturnBookAction extends HttpServlet {
 		debtUser.setTakenBook(bookName);
 		debtUser.setTekenBookQuantity(bookQuantity);
 
-		String confirmation = TakeOrReturnBook.returnBook(book, debtUser);
+		String confirmation = CustomerService.returnBook(book, debtUser);
 		response.sendRedirect("UserView.jsp?msg=" + confirmation);
 	}
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import in.micheal.model.BookDetail;
 import in.micheal.service.AdminService;
-import in.micheal.service.ViewBookByName;
+import in.micheal.service.CustomerService;
 
 public class ViewBookByNameTest {
 
@@ -20,7 +20,7 @@ public class ViewBookByNameTest {
 		obj.setQuantity(20);
 		AdminService.uploadBooks(obj);
 
-		obj = ViewBookByName.bookName("JAVA");
+		obj = CustomerService.bookName("JAVA");
 
 		assertNotNull(obj);
 	}
@@ -32,7 +32,7 @@ public class ViewBookByNameTest {
 	@Test
 	public void inValidDetails() {
 
-		BookDetail obj = ViewBookByName.bookName("lol");
+		BookDetail obj = CustomerService.bookName("lol");
 
 		assertNull(obj);
 

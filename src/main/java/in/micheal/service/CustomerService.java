@@ -1,16 +1,14 @@
 package in.micheal.service;
 
-import in.micheal.model.BookDetail;
-import in.micheal.model.DebtUserDetail;
-import in.micheal.validator.BookQuantityValidator;
-import in.micheal.validator.BookValidator;
-import in.micheal.validator.DebtBookQuantityValidator;
-import in.micheal.validator.DebtUserValidator;
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
+import in.micheal.model.BookDetail;
+import in.micheal.model.DebtUserDetail;
+import in.micheal.validator.BookValidator;
+import in.micheal.validator.DebtUserValidator;
 
-public class TakeOrReturnBook {
-	private TakeOrReturnBook() {
+public class CustomerService {
+	private CustomerService() {
 		// default constructor
 	}
 
@@ -27,7 +25,7 @@ public class TakeOrReturnBook {
 
 		int index = BookValidator.bookRepetationChecker(obj.getName());
 		if (index != -1) {
-			boolean confirmation = BookQuantityValidator.bookQuantityValidator(obj.getQuantity(), index);
+			boolean confirmation = BookValidator.bookQuantityValidator(obj.getQuantity(), index);
 			if (confirmation) {
 
 				BookDetailsDAO.subBookQuantity(obj, index);
@@ -60,7 +58,7 @@ public class TakeOrReturnBook {
 		if (debtUserIndex == -1) {
 			confirmation = "YOU DIDNT TOOK THIS BOOK";
 		} else {
-			int remainingBook = DebtBookQuantityValidator.validateBookQuantity(book.getQuantity(), debtUserIndex);
+			int remainingBook = BookValidator.validateBookQuantity(book.getQuantity(), debtUserIndex);
 			if (remainingBook < 0) {
 				confirmation = "YOUR RETURNING TOO MUCH BOOKS";
 			} else if (remainingBook > 0) {
@@ -77,4 +75,24 @@ public class TakeOrReturnBook {
 		return confirmation;
 
 	}
+
+	/**
+	 * This method returns the object in with the given parameter is present or else
+	 * returns null
+	 * 
+	 * @param bookname
+	 * @return
+	 */
+	public static BookDetail bookName(String bookname) {
+		String bookName = bookname.toUpperCase();
+		BookDetail obj;
+		int index = BookValidator.bookRepetationChecker(bookName);
+		if (index > -1) {
+			obj = BookDetailsDAO.getBookDetails().get(index);
+		} else {
+			obj = null;
+		}
+		return obj;
+	}
+
 }

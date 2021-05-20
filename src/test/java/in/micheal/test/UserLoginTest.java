@@ -17,7 +17,11 @@ public class UserLoginTest {
 		obj.setUserId(userId);
 		obj.setPassword(password);
 
-		UserService.userRegistration(obj);
+		try {
+			UserService.userRegistration(obj);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		boolean confirmation = UserService.userLogin(userId, password);
 		assertTrue(confirmation);
 
@@ -31,7 +35,11 @@ public class UserLoginTest {
 		obj.setUserId(userId);
 		obj.setPassword(password);
 
-		UserService.userRegistration(obj);
+		try {
+			UserService.userRegistration(obj);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		boolean confirmation = UserService.userLogin(98765L, password);
 		assertFalse(confirmation);
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
-import in.micheal.service.TakeOrReturnBook;
+import in.micheal.service.CustomerService;
 
 /**
  * Servlet implementation class TakeBookAction
@@ -38,7 +38,7 @@ public class TakeBookAction extends HttpServlet {
 		debtUser.setTakenDate(null);
 		LocalDate date = LocalDate.now();
 		debtUser.setTakenDate(date);
-		String confirmation = TakeOrReturnBook.takeBook(book, debtUser);
+		String confirmation = CustomerService.takeBook(book, debtUser);
 		response.sendRedirect("UserView.jsp?msg=" + confirmation);
 
 	}

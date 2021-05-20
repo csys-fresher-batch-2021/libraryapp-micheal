@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.micheal.model.BookDetail;
-import in.micheal.service.ViewBookByName;
+import in.micheal.service.CustomerService;
 
 /**
  * Servlet implementation class ViewBookByNameAction
@@ -21,7 +21,7 @@ public class ViewBookByNameAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		BookDetail obj = ViewBookByName.bookName(request.getParameter("bookName"));
+		BookDetail obj = CustomerService.bookName(request.getParameter("bookName"));
 
 		if (obj != null) {
 			int bookQuantity = obj.getQuantity();

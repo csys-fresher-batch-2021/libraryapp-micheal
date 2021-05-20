@@ -37,7 +37,7 @@ public class UserRegistrationAction extends HttpServlet {
 				response.sendRedirect("UserRegistration.jsp?msg=" + msg);
 			}
 
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			String msg = e.getMessage();
 			response.sendRedirect("UserRegistration.jsp?msg=" + msg);
 

@@ -7,7 +7,7 @@ import org.junit.Test;
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
 import in.micheal.service.AdminService;
-import in.micheal.service.TakeOrReturnBook;
+import in.micheal.service.CustomerService;
 
 public class ReturnBookTest {
 
@@ -33,13 +33,13 @@ public class ReturnBookTest {
 		debtUser.setTakenBook("MATHS");
 		debtUser.setTekenBookQuantity(10);
 
-		TakeOrReturnBook.takeBook(takingBook, debtUser);
+		CustomerService.takeBook(takingBook, debtUser);
 
 		BookDetail returningBook = new BookDetail();
 		returningBook.setName("MATHS");
 		returningBook.setQuantity(5);
 
-		String confirmation = TakeOrReturnBook.returnBook(returningBook, debtUser);
+		String confirmation = CustomerService.returnBook(returningBook, debtUser);
 		assertEquals("YOU RETURNED SOME BOOKS", confirmation);
 	}
 
@@ -65,13 +65,13 @@ public class ReturnBookTest {
 		debtUser.setTakenBook("SCIENCE");
 		debtUser.setTekenBookQuantity(10);
 
-		TakeOrReturnBook.takeBook(takingBook, debtUser);
+		CustomerService.takeBook(takingBook, debtUser);
 
 		BookDetail returningBook = new BookDetail();
 		returningBook.setName("SCIENCE");
 		returningBook.setQuantity(15);
 
-		String confirmation = TakeOrReturnBook.returnBook(returningBook, debtUser);
+		String confirmation = CustomerService.returnBook(returningBook, debtUser);
 		assertEquals("YOUR RETURNING TOO MUCH BOOKS", confirmation);
 	}
 
@@ -97,13 +97,13 @@ public class ReturnBookTest {
 		debtUser.setTakenBook("SCIENCE");
 		debtUser.setTekenBookQuantity(10);
 
-		TakeOrReturnBook.takeBook(takingBook, debtUser);
+		CustomerService.takeBook(takingBook, debtUser);
 
 		BookDetail returningBook = new BookDetail();
 		returningBook.setName("SCIENCE");
 		returningBook.setQuantity(10);
 
-		String confirmation = TakeOrReturnBook.returnBook(returningBook, debtUser);
+		String confirmation = CustomerService.returnBook(returningBook, debtUser);
 		assertEquals("YOU RETURNED ALL BOOKS", confirmation);
 	}
 
