@@ -25,11 +25,11 @@ public class ConnectionUtil {
 	 */
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-		// To Load the JDBC driver in memory
+
 		Class.forName(driverClass);
-		// To Get the connection
-		String url ="jdbc:postgresql://projecttracker.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
-		//url ="jdbc:postgresql://projecttracker.ck1auq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
+
+		String url = "jdbc:postgresql://projecttracker.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
+
 		return DriverManager.getConnection(url, username, password);
 	}
 
@@ -70,6 +70,7 @@ public class ConnectionUtil {
 			e.printStackTrace();
 		}
 	}
+
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		getConnection();
 	}
