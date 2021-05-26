@@ -7,7 +7,9 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<div>
 		<h3>Welcome To Library Management</h3>
+	</div>
 		
 		
 

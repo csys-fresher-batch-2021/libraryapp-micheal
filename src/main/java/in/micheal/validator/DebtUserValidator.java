@@ -1,7 +1,7 @@
 package in.micheal.validator;
 
 import in.micheal.dao.DebtUserDetailsDAO;
-import in.micheal.model.DebtUserDetail;
+import in.micheal.exception.DbException;
 
 public class DebtUserValidator {
 
@@ -14,15 +14,18 @@ public class DebtUserValidator {
 	 * 
 	 * @param debtUser
 	 * @return
+	 * @throws DbException
 	 */
-	public static int isDebtUser(DebtUserDetail debtUser) {
-		int debtUserIndex = -1;
-		for (DebtUserDetail obj : DebtUserDetailsDAO.getDebtUserDetail()) {
-			if (obj.getDebtUserId() == debtUser.getDebtUserId() && obj.getTakenBook().equals(debtUser.getTakenBook())) {
-				debtUserIndex = DebtUserDetailsDAO.getDebtUserDetail().indexOf(obj);
-			}
+	public static boolean isDebtUser(Long userId, String takenBook) throws DbException {
+		boolean confirmation = false;
+
+		Long debtUser = DebtUserDetailsDAO.findDebtUser(userId, takenBook);
+		if (debtUser != null) {
+			confirmation = true;
+
 		}
-		return debtUserIndex;
+
+		return confirmation;
 
 	}
 }

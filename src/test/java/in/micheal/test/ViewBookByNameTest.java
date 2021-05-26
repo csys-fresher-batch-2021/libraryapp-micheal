@@ -2,10 +2,13 @@ package in.micheal.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import in.micheal.dao.BookDetailsDAO;
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
-import in.micheal.service.AdminService;
 import in.micheal.service.CustomerService;
 
 public class ViewBookByNameTest {
@@ -15,14 +18,39 @@ public class ViewBookByNameTest {
 	 */
 	@Test
 	public void validDetails() {
-		BookDetail obj = new BookDetail();
-		obj.setName("JAVA");
-		obj.setQuantity(20);
-		AdminService.uploadBooks(obj);
 
-		obj = CustomerService.bookName("JAVA");
+		try {
+			BookDetailsDAO.deleteAllRecords();
 
-		assertNotNull(obj);
+			// First add books
+			BookDetail book1 = new BookDetail();
+			book1.setName("PYTHON EDITION-3");
+			book1.setQuantity(10);
+
+			BookDetail book2 = new BookDetail();
+			book2.setName("PYTHON EDITION-1");
+			book2.setQuantity(10);
+
+			BookDetail book3 = new BookDetail();
+			book2.setName("PYTHON EDITION-2");
+			book2.setQuantity(10);
+
+			BookDetailsDAO.addBooks(book1);
+			BookDetailsDAO.addBooks(book2);
+			BookDetailsDAO.addBooks(book3);
+
+			List<BookDetail> searchResults = null;
+
+			searchResults = CustomerService.getBooks("PYT");
+
+			assertEquals(2, searchResults.size());
+			// delete all records
+
+			BookDetailsDAO.deleteAllRecords();
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -32,9 +60,15 @@ public class ViewBookByNameTest {
 	@Test
 	public void inValidDetails() {
 
-		BookDetail obj = CustomerService.bookName("lol");
+		List<BookDetail> searchResults = null;
 
-		assertNull(obj);
+		try {
+			searchResults = CustomerService.getBooks("lol");
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(0, searchResults.size());
 
 	}
 

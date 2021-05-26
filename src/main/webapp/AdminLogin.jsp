@@ -6,9 +6,10 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="rounded mx-auto d-block">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<div>
 		<h3>ADMIN LOGIN</h3>
 		<%
 		String infoMessage = request.getParameter("infoMessage");
@@ -32,7 +33,7 @@
 			<input type="reset" value="RESET" class="btn btn-danger">
 		</form>
 		<br> <a href="AdminRegistration.jsp">Register</a>
-
+	</div>
 
 	</main>
 </body>

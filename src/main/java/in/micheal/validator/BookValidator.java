@@ -1,7 +1,10 @@
 package in.micheal.validator;
 
+import java.util.List;
+
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 
 public class BookValidator {
@@ -15,19 +18,16 @@ public class BookValidator {
 	 * 
 	 * @param bookName
 	 * @return
+	 * @throws DbException
 	 */
-	public static int bookRepetationChecker(String bookName) {
-		int index = -1;
-		for (BookDetail obj : BookDetailsDAO.getBookDetails()) {
-			if (obj.getName().equals(bookName)) {
-				index = BookDetailsDAO.getBookDetails().indexOf(obj);
-			}
-		}
-		return index;
-	}
+	public static boolean bookRepetationChecker(String bookName) throws DbException {
+		boolean confirmation = true;
+		List<BookDetail> allBooks = BookDetailsDAO.findBook(bookName);
+		if (allBooks.isEmpty()) {
+			confirmation = false;
 
-	public static int validateBookQuantity(int bookQuantity, int debtBookIndex) {
-		return (DebtUserDetailsDAO.getDebtUserDetail().get(debtBookIndex).getTekenBookQuantity()) - bookQuantity;
+		}
+		return confirmation;
 	}
 
 	/**
@@ -37,14 +37,23 @@ public class BookValidator {
 	 * @param actualQuantity
 	 * @param bookIndex
 	 * @return
+	 * @throws DbException
 	 */
-	public static boolean bookQuantityValidator(int actualQuantity, int bookIndex) {
-		boolean confirmation = false;
-		BookDetail bookObj = BookDetailsDAO.getBookDetails().get(bookIndex);
-		int bookQuantity = bookObj.getQuantity() - actualQuantity;
-		if (bookQuantity > 0) {
-			confirmation = true;
-		}
-		return confirmation;
+	public static int bookQuantityValidator(String bookName, int neededBookQuantity) throws DbException {
+		int bookQuantityInDB;
+		int remainingBookInDB = 0;
+
+		bookQuantityInDB = BookDetailsDAO.getBookQuantity(bookName);
+		remainingBookInDB = bookQuantityInDB - neededBookQuantity;
+
+		return remainingBookInDB;
+	}
+
+	public static int debtBookQuantityValidator(String bookName, long userId) throws DbException {
+		int debtUserTakenBookQuantity;
+
+		debtUserTakenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userId, bookName);
+
+		return debtUserTakenBookQuantity;
 	}
 }

@@ -1,6 +1,8 @@
 package in.micheal.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +18,16 @@ public class LogOutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession loggedInUser = request.getSession();
 
 		loggedInUser.removeAttribute("LOOGGED_IN_USER");
-		response.sendRedirect("UserLogin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("UserLogin.jsp");
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

@@ -24,15 +24,12 @@ Long loggedInUsername = (Long) loggedInUser.getAttribute("LOOGGED_IN_USER");
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ViewBooks.jsp">View Books</a>
+        <a class="nav-link" href="SearchBooks.jsp">View Books</a>
       </li>
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
         <a class="nav-link" href="UserLogin.jsp">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="AdminLogin.jsp">Admin_Login</a>
       </li>
       </ul>
       <%} else{ %>

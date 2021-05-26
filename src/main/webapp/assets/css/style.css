@@ -1,0 +1,12 @@
+body {
+	background:
+		url(https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+div {
+	display: bock;
+	text-align: center;
+}
+
