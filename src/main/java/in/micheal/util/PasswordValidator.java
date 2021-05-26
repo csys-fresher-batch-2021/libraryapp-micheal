@@ -1,4 +1,4 @@
-package in.micheal.validator;
+package in.micheal.util;
 
 import in.micheal.exception.InValidPasswordException;
 
@@ -9,7 +9,7 @@ public class PasswordValidator {
 
 	public static void validatePassword(String input) throws InValidPasswordException {
 		if (input.length() < 4) {
-			throw new InValidPasswordException("PASSWORD LENGTH MUST BE GREATER THAN 4 DIGITS");
+			throw new InValidPasswordException("TOO WEAK PASSWORD");
 		}
 	}
 }

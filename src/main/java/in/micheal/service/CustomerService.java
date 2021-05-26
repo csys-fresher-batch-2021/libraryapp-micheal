@@ -1,7 +1,12 @@
 package in.micheal.service;
 
+import java.util.List;
+
+
+
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
 import in.micheal.validator.BookValidator;
@@ -13,86 +18,119 @@ public class CustomerService {
 	}
 
 	/**
-	 * This method used Take book and returns string statement according to the
+	 * This method is used to take books ,This method updates the debt User
+	 * DataBase,BookDetails Databse according to the quantity of book input
+	 * 
 	 * input
 	 * 
 	 * @param obj
 	 * @param userobj
 	 * @return
+	 * @throws DbException
 	 */
-	public static String takeBook(BookDetail obj, DebtUserDetail userobj) {
-		String verification;
+	public static String takeBook(DebtUserDetail userobj) throws DbException {
+		String verification = null;
+		int remainingBookInDB;
 
-		int index = BookValidator.bookRepetationChecker(obj.getName());
-		if (index != -1) {
-			boolean confirmation = BookValidator.bookQuantityValidator(obj.getQuantity(), index);
-			if (confirmation) {
+		remainingBookInDB = BookValidator.bookQuantityValidator(userobj.getTakenBook(), userobj.getTekenBookQuantity());
+		if (remainingBookInDB > 0) {
+			boolean confirmation;
 
-				BookDetailsDAO.subBookQuantity(obj, index);
+			confirmation = DebtUserValidator.isDebtUser(userobj.getDebtUserId(), userobj.getTakenBook());
+
+			if (!confirmation) {
+
 				DebtUserDetailsDAO.addDebtUsers(userobj);
+				BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
+
 				verification = "BOOK TAKEN SUCCESSFULLY";
 			} else {
-				verification = "SORRY INSUFFICIENT BOOK";
-			}
 
+				BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
+				int debtUserTakenBook = DebtUserDetailsDAO.getTakenBookQuantity(userobj.getDebtUserId(),
+						userobj.getTakenBook());
+				int remDebtBooks = userobj.getTekenBookQuantity() + debtUserTakenBook;
+				DebtUserDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remDebtBooks, userobj.getDebtUserId());
+				verification = "BOOK TAKEN SUCCESSFULLY";
+			}
 		} else {
-			verification = "SORRY BOOK NOT AVAILABLE";
+			verification = "SORRY INSUFFICIENT BOOK";
 		}
 
 		return verification;
 	}
 
 	/**
-	 * This method is used return the books and update debtUserDetails and
-	 * BookDetails
+	 * This method is used return the books , This method updates Debt User
+	 * Database,bookDetail Database according to the input
 	 * 
 	 * @param book
 	 * @param userObj
 	 * @return
+	 * @throws DbException
 	 */
 
-	public static String returnBook(BookDetail book, DebtUserDetail userObj) {
+	public static String returnBook(DebtUserDetail userObj) throws DbException {
 		String confirmation = null;
-		int debtUserIndex = DebtUserValidator.isDebtUser(userObj);
-		int bookIndex = BookValidator.bookRepetationChecker(book.getName());
-		if (debtUserIndex == -1) {
+		boolean isDebtUser = false;
+		int takenBookQuantity = 0;
+
+		isDebtUser = DebtUserValidator.isDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+		if (!isDebtUser) {
+
 			confirmation = "YOU DIDNT TOOK THIS BOOK";
 		} else {
-			int remainingBook = BookValidator.validateBookQuantity(book.getQuantity(), debtUserIndex);
-			if (remainingBook < 0) {
-				confirmation = "YOUR RETURNING TOO MUCH BOOKS";
-			} else if (remainingBook > 0) {
-				confirmation = "YOU RETURNED SOME BOOKS";
-				DebtUserDetailsDAO.subDebtQuantity(remainingBook, debtUserIndex);
-				BookDetailsDAO.addBookQuantity(book, bookIndex);
 
-			} else if (remainingBook == 0) {
-				confirmation = "YOU RETURNED ALL BOOKS";
-				DebtUserDetailsDAO.subDebtQuantity(remainingBook, debtUserIndex);
-				BookDetailsDAO.addBookQuantity(book, bookIndex);
-			}
+			takenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userObj.getDebtUserId(),
+					userObj.getTakenBook());
+
+		}
+		int remainingBook = takenBookQuantity - userObj.getTekenBookQuantity();
+		if (remainingBook < 0) {
+			confirmation = "YOUR RETURNING TOO MUCH BOOKS";
+		} else if (remainingBook > 0) {
+			confirmation = "YOU RETURNED SOME BOOKS";
+			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+					+ userObj.getTekenBookQuantity();
+			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+			DebtUserDetailsDAO.updateBookQuantity(userObj.getTakenBook(), remainingBook, userObj.getDebtUserId());
+
+		} else if (remainingBook == 0) {
+			confirmation = "YOU RETURNED ALL BOOKS";
+			DebtUserDetailsDAO.deleteDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+					+ userObj.getTekenBookQuantity();
+			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+
 		}
 		return confirmation;
 
 	}
 
 	/**
-	 * This method returns the object in with the given parameter is present or else
-	 * returns null
+	 * This method is used toget all book according to the input book name from the
+	 * data base
 	 * 
-	 * @param bookname
+	 * @param bookName
 	 * @return
+	 * @throws DbException
 	 */
-	public static BookDetail bookName(String bookname) {
-		String bookName = bookname.toUpperCase();
-		BookDetail obj;
-		int index = BookValidator.bookRepetationChecker(bookName);
-		if (index > -1) {
-			obj = BookDetailsDAO.getBookDetails().get(index);
-		} else {
-			obj = null;
-		}
-		return obj;
+	public static List<BookDetail> getBooks(String bookName) throws DbException {
+		List<BookDetail> searchResults;
+
+		searchResults = BookDetailsDAO.searchBook(bookName);
+
+		return searchResults;
+
+	}
+
+	public static List<BookDetail> getBooks(long debtUserId) throws DbException {
+
+		List<BookDetail> debtBooks;
+
+		debtBooks = DebtUserDetailsDAO.searchBooks(debtUserId);
+
+		return debtBooks;
 	}
 
 }

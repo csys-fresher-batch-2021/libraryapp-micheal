@@ -1,7 +1,7 @@
 package in.micheal.validator;
 
 import in.micheal.dao.UserDetailsDAO;
-import in.micheal.model.UserDetails;
+import in.micheal.exception.DbException;
 
 public class UserServiceValidator {
 	private UserServiceValidator() {
@@ -9,41 +9,21 @@ public class UserServiceValidator {
 	}
 
 	/**
-	 * This method validates Admin login credentials
-	 * 
-	 * @param adminId
-	 * @param password
-	 * @return
-	 */
-	public static boolean adminloginValidator(long adminId, String password) {
-		boolean confirmation = false;
-		for (UserDetails user : UserDetailsDAO.getUserDetails()) {
-			if (user.getUserId() == adminId && user.getAdminPassword().equals(password)) {
-				confirmation = true;
-				break;
-			}
-		}
-		return confirmation;
-	}
-
-	/**
 	 * This method validates Admin registration credentials
 	 * 
 	 * @param adminObj
 	 * @return
+	 * @throws DbException
 	 */
-	public static boolean registrationValidator(UserDetails obj) {
-		boolean registration = false;
-		if (obj.getUserId() > 1000) {
-			for (UserDetails objV : UserDetailsDAO.getUserDetails()) {
-				if (objV.getUserId() == obj.getUserId()) {
-					registration = true;
-					break;
-				}
-			}
+	public static boolean isRegisteredUser(Long userid) throws DbException {
+		boolean registeredUser = false;
+		Long userId;
+		userId = UserDetailsDAO.findUser(userid);
+		if (userId != null) {
+			registeredUser = true;
 		}
 
-		return registration;
+		return registeredUser;
 	}
 
 	/**
@@ -52,14 +32,18 @@ public class UserServiceValidator {
 	 * @param userId
 	 * @param password
 	 * @return
+	 * @throws DbException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static boolean userLoginValidator(long userId, String password) {
+	public static boolean userLoginValidator(long userId, String password) throws DbException {
 		boolean confirmation = false;
-		for (UserDetails user : UserDetailsDAO.getUserDetails()) {
-			if (user.getUserId() == userId && user.getPassword().equals(password)) {
-				confirmation = true;
-				break;
-			}
+		Long userid = null;
+
+		userid = UserDetailsDAO.getUserIdAndPassword(userId, password);
+
+		if (userid != null) {
+			confirmation = true;
 		}
 		return confirmation;
 	}

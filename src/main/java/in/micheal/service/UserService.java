@@ -1,9 +1,12 @@
 package in.micheal.service;
 
 import in.micheal.dao.UserDetailsDAO;
+import in.micheal.exception.DbException;
+import in.micheal.exception.InValidPasswordException;
+import in.micheal.exception.UserIdException;
 import in.micheal.model.UserDetails;
-import in.micheal.validator.PasswordValidator;
-import in.micheal.validator.UserIdValidator;
+import in.micheal.util.PasswordValidator;
+import in.micheal.util.UserIdValidator;
 import in.micheal.validator.UserServiceValidator;
 
 public class UserService {
@@ -17,49 +20,26 @@ public class UserService {
 	 * @param userId
 	 * @param password
 	 * @return
+	 * @throws DbException
 	 */
-	public static boolean userLogin(long userId, String password) {
-		boolean verification = false;
-		boolean confirmation = UserServiceValidator.userLoginValidator(userId, password);
-		if (confirmation) {
-			verification = true;
-		}
-		return verification;
+	public static boolean userLogin(UserDetails user) throws DbException {
+		boolean confirmation;
+		confirmation = UserServiceValidator.userLoginValidator(user.getUserId(), user.getPassword());
+
+		return confirmation;
 	}
 
 	/**
-	 * This methods return true if the log in credentials is true
+	 * This method is used to check login credentials of admin
 	 * 
-	 * @param adminId
-	 * @param password
+	 * @param user
 	 * @return
+	 * @throws DbException
 	 */
-	public static boolean adminLogin(long adminId, String password) {
-		boolean verification = false;
-		boolean confirmation = UserServiceValidator.adminloginValidator(adminId, password);
-		if (confirmation) {
-			verification = true;
-		}
-		return verification;
+	public static boolean adminLogin(UserDetails user) throws DbException {
+		boolean confirmation;
+		confirmation = UserServiceValidator.userLoginValidator(user.getUserId(), user.getAdminPassword());
 
-	}
-
-	/**
-	 * This method is used to register admin Id in user details
-	 * 
-	 * @param adminObj
-	 * @return
-	 * @throws Throwable 
-	 */
-	public static boolean adminRegistration(UserDetails adminObj) throws Throwable {
-		boolean confirmation = false;
-		UserIdValidator.validateUserId(adminObj.getUserId());
-		boolean adminIdRepeatation = UserServiceValidator.registrationValidator(adminObj);
-
-		if (!adminIdRepeatation) {
-			UserDetailsDAO.addUser(adminObj);
-			confirmation = true;
-		}
 		return confirmation;
 	}
 
@@ -68,20 +48,36 @@ public class UserService {
 	 * 
 	 * @param userObj
 	 * @return
-	 * @throws Throwable 
+	 * @throws DbException
+	 * @throws UserIdException
+	 * @throws InValidPasswordException
+	 * @throws Throwable
 	 * @throws Exception
 	 */
 
-	public static boolean userRegistration(UserDetails userObj) throws Throwable {
-		boolean confirmation = false;
+	public static boolean userRegistration(UserDetails userObj)
+			throws DbException, UserIdException, InValidPasswordException {
 		UserIdValidator.validateUserId(userObj.getUserId());
-		PasswordValidator.validatePassword(userObj.getPassword());
-		boolean userIdRepetation = UserServiceValidator.registrationValidator(userObj);
-		if (!userIdRepetation) {
-			UserDetailsDAO.addUser(userObj);
-			confirmation = true;
+		if (userObj.getAdminPassword() == null) {
+			PasswordValidator.validatePassword(userObj.getPassword());
+		} else {
+			PasswordValidator.validatePassword(userObj.getAdminPassword());
 		}
-		return confirmation;
 
+		boolean confirmation = false;
+		boolean isRegisteredUser;
+		isRegisteredUser = UserServiceValidator.isRegisteredUser(userObj.getUserId());
+		if (!isRegisteredUser) {
+			if (userObj.getAdminPassword() == null) {
+				UserDetailsDAO.addUser(userObj);
+			} else {
+				UserDetailsDAO.addAdmin(userObj);
+			}
+			confirmation = true;
+
+		}
+
+		return confirmation;
 	}
+
 }

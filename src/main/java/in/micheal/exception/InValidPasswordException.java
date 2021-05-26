@@ -3,7 +3,7 @@ package in.micheal.exception;
 public class InValidPasswordException extends Exception {
 	/**
 	 * 
-	 * This methods throws Exception if password is smaller
+	 * User defined invalid password exception
 	 */
 	private static final long serialVersionUID = 1L;
 

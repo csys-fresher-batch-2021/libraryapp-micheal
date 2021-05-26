@@ -1,10 +1,10 @@
 package in.micheal.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class DebtUserDetail {
 	private long debtUserId;
-	private LocalDate takenDate;
+	private Date takenDate;
 	private String takenBook;
 	private int tekenBookQuantity;
 
@@ -16,11 +16,12 @@ public class DebtUserDetail {
 		this.debtUserId = debtUserId;
 	}
 
-	public LocalDate getTakenDate() {
+	public Date getTakenDate() {
 		return takenDate;
 	}
 
-	public void setTakenDate(LocalDate date) {
+	public void setTakenDate(Date date) {
+
 		this.takenDate = date;
 	}
 

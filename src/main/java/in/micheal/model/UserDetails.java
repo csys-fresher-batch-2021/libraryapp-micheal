@@ -11,6 +11,7 @@ public class UserDetails {
 	private long userId;
 	private String password;
 	private String adminPassword;
+	private long phoneNo;
 
 	public void setUserName(String name) {
 		userName = name;
@@ -25,7 +26,7 @@ public class UserDetails {
 	}
 
 	public void setAdminPassword(String adminpasswordS) {
-		adminPassword = adminpasswordS.concat("@libmanagement987");
+		adminPassword = adminpasswordS.concat("@lib_987");
 
 	}
 
@@ -43,5 +44,13 @@ public class UserDetails {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public long getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(long phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 }

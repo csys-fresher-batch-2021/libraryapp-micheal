@@ -1,6 +1,7 @@
 package in.micheal.service;
 
 import in.micheal.dao.BookDetailsDAO;
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.validator.BookValidator;
 
@@ -15,17 +16,22 @@ public class AdminService {
 	 * 
 	 * @param obj
 	 * @return
+	 * @throws DbException
 	 */
-	public static String uploadBooks(BookDetail obj) {
+	public static String uploadBooks(BookDetail obj) throws DbException {
 		String msg;
-		int bookIndex = BookValidator.bookRepetationChecker(obj.getName());
-		if (bookIndex == -1) {
-			BookDetailsDAO.addBooks(obj);
-			msg = "BOOK UPLOADED SUCCESSFULLY";
-		} else {
-			BookDetailsDAO.addBookQuantity(obj, bookIndex);
+		boolean confirmation = BookValidator.bookRepetationChecker(obj.getName());
+		if (confirmation) {
+			int booksInDb = BookDetailsDAO.getBookQuantity(obj.getName());
+			int bookToBeUpdated = booksInDb + obj.getQuantity();
+			BookDetailsDAO.updateBookQuantity(obj.getName(), bookToBeUpdated);
 			msg = "BOOK UPDATED SUCCESSFULLY";
+		} else {
+			BookDetailsDAO.addBooks(obj);
+
+			msg = "BOOK UPLOADED SUCCESSFULLY";
 		}
+
 		return msg;
 	}
 }

@@ -1,12 +1,17 @@
 package in.micheal.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.service.CustomerService;
 
@@ -18,17 +23,19 @@ public class ViewBookByNameAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+		List<BookDetail> searchResults = null;
+		try {
+			searchResults = CustomerService.getBooks(request.getParameter("bookName").toUpperCase());
+			Gson gson = new Gson();
+			String json = gson.toJson(searchResults);
+			PrintWriter out = response.getWriter();
+			out.println(json);
+			out.flush();
 
-		BookDetail obj = CustomerService.bookName(request.getParameter("bookName"));
-
-		if (obj != null) {
-			int bookQuantity = obj.getQuantity();
-			response.sendRedirect("ViewBooks.jsp?bookQuantity=" + bookQuantity);
-		} else {
-			response.sendRedirect("ViewBooks.jsp?bookQuantity=" + "0");
-
+		} catch (DbException | IOException e) {
+			e.printStackTrace();
 		}
+
 	}
 }

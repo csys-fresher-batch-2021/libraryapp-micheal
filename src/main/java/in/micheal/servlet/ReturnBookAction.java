@@ -1,6 +1,8 @@
 package in.micheal.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
 import in.micheal.service.CustomerService;
@@ -20,8 +23,7 @@ public class ReturnBookAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession loggedInUser = request.getSession();
 		long loggedInUsername = (long) loggedInUser.getAttribute("LOOGGED_IN_USER");
@@ -39,8 +41,18 @@ public class ReturnBookAction extends HttpServlet {
 		debtUser.setTakenBook(bookName);
 		debtUser.setTekenBookQuantity(bookQuantity);
 
-		String confirmation = CustomerService.returnBook(book, debtUser);
-		response.sendRedirect("UserView.jsp?msg=" + confirmation);
+		String confirmation = null;
+		try {
+			confirmation = CustomerService.returnBook(debtUser);
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp?msg=" + confirmation);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
