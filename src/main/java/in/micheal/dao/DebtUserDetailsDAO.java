@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import in.micheal.exception.DbException;
@@ -243,6 +244,47 @@ public class DebtUserDetailsDAO {
 			ConnectionUtil.close(rs, pst, con);
 		}
 		return searchResults;
+	}
+
+	/**
+	 * This method returns all records in debtuser_db
+	 * 
+	 * @return
+	 * @throws DbException
+	 */
+	public static List<DebtUserDetail> getAllRecords() throws DbException {
+
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<DebtUserDetail> searchResults = new ArrayList<>();
+		try {
+			con = ConnectionUtil.getConnection();
+			String sql = "select * from debtuser_db";
+			pst = con.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String bookname = rs.getString("taken_book");
+				int bookquantity = rs.getInt("taken_quantity");
+				Date takenDate = rs.getDate("taken_date");
+				int userId = rs.getInt("user_id");
+
+				DebtUserDetail user = new DebtUserDetail();
+				user.setTakenBook(bookname);
+				user.setTekenBookQuantity(bookquantity);
+				user.setDebtUserId(bookquantity);
+				user.setDebtUserId(userId);
+				user.setTakenDate(takenDate);
+				searchResults.add(user);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DbException("UNABLE TO SEARCH BOOKS");
+		} finally {
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return searchResults;
+
 	}
 
 }

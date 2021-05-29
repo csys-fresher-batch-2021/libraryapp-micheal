@@ -25,7 +25,6 @@ public class UserLoginAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession loggedInUser = request.getSession();
-		String redirection = "UserLogin.jsp?msg=";
 
 		try {
 			long userId = Long.parseLong(request.getParameter("userId"));
@@ -44,11 +43,11 @@ public class UserLoginAction extends HttpServlet {
 				loggedInUser.setAttribute("LOOGGED_IN_USER", userId);
 			} else {
 				String msg = "INVALID LOGIN CREDENTIALS";
-				RequestDispatcher rd = request.getRequestDispatcher(redirection + msg);
+				RequestDispatcher rd = request.getRequestDispatcher("UserLogin.jsp?errorMessage=" + msg);
 				rd.forward(request, response);
 			}
 		} catch (DbException | ServletException | IOException e) {
-			RequestDispatcher rd = request.getRequestDispatcher(redirection + e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("UserLogin.jsp?errorMessage=" + e.getMessage());
 			try {
 				rd.forward(request, response);
 			} catch (ServletException | IOException e1) {

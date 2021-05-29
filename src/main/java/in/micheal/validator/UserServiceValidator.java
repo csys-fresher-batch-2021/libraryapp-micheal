@@ -33,8 +33,6 @@ public class UserServiceValidator {
 	 * @param password
 	 * @return
 	 * @throws DbException
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
 	 */
 	public static boolean userLoginValidator(long userId, String password) throws DbException {
 		boolean confirmation = false;
