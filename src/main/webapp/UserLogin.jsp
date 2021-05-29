@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="in.micheal.model.BookDetail" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +12,20 @@
 	<main class="container-fluid">
 	<div>
 	<h3>USER LOGIN</h3>
-	<%
+		<%
 		String Message = request.getParameter("msg");
 		if(Message != null){
 			out.println("<font color='green'>" + Message + "</font>");
 		}
 		%>
+		<%
+		String Msg = request.getParameter("errorMessage");
+		if(Msg != null){
+			out.println("<font color='red'>" + Msg + "</font>");
+		}
+		%>
+		
+		
 		
 		<form action="UserLoginAction" method="post" >
 		<strong><label>ENTER YOUR USER ID</label></strong><br>
@@ -25,7 +34,7 @@
 		<input type="password" required name="password"><br><br>
 		<button class="btn btn-primary">SUBMIT</button> <input type="reset" class="btn btn-danger">
 		</form><br><br>
-		<a href=UserRegistration.jsp>REGISTER</a>
+		<a href=UserRegistration.jsp >REGISTER</a>
 		</div>
 		
 		

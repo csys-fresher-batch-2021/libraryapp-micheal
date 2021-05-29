@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Registration</title>
 </head>
 <body class="rounded mx-auto d-block">
 <jsp:include page="header.jsp"></jsp:include>

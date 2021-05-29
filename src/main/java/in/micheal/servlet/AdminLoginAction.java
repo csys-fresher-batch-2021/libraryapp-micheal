@@ -30,21 +30,21 @@ public class AdminLoginAction extends HttpServlet {
 			UserDetails admin = new UserDetails();
 			admin.setUserId(adminId);
 			admin.setPassword(password);
-			boolean confirmation = false;
+			boolean confirmation;
 
-			confirmation = UserService.adminLogin(admin);
+			confirmation = UserService.userLogin(admin);
 
 			if (confirmation) {
 				RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp");
 				rd.forward(request, response);
 			} else {
 				message = "Invalid Login credentials";
-				RequestDispatcher rd = request.getRequestDispatcher("AdminLogin.jsp?message=" + message);
+				RequestDispatcher rd = request.getRequestDispatcher("AdminLogin.jsp?errorMessage=" + message);
 				rd.forward(request, response);
 			}
 		} catch (DbException | ServletException | IOException e) {
 			message = e.getMessage();
-			RequestDispatcher rd = request.getRequestDispatcher("AdminLogin.jsp?message=" + message);
+			RequestDispatcher rd = request.getRequestDispatcher("AdminLogin.jsp?errorMessage=" + message);
 			try {
 				rd.forward(request, response);
 			} catch (ServletException | IOException e1) {

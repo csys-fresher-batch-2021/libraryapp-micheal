@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User View</title>
 </head>
 <body class="rounded mx-auto d-block">
 <jsp:include page="header.jsp"></jsp:include>
@@ -32,29 +32,29 @@
 	<form action="TakeBookAction" method="post">
 	<h3>TAKE BOOK</h3><br>
 	<strong><label>ENTER THE BOOK NAME</label></strong><br>
-	<input type="text" required placeholder="BOOK NAME" name="bookName"><br>
+	<input type="text" required placeholder="BOOK NAME" name="bookName" id="bookName"><br>
 	<strong><label>ENTER THE BOOK QUANTITY</label></strong><br>
-	<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity"><br><br>
+	<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity" min=1 id="bookQuantity"><br><br>
 	<button class="btn btn-info">SUBMIT</button>&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
 	</form>
-	
-	
-	
-	
-	
-	
-	
-	<%} else  {%>
+
+
+
+
+
+
+
+			<%} else  {%>
 	<form action="ReturnBookAction" method="post">
 	<h3>RETURN BOOK</h3><br>
 	<strong><label>ENTER THE RETURNING BOOK NAME</label></strong><br>
-	<input type="text" required placeholder="BOOK NAME" name="bookName"><br>
+	<input type="text" required placeholder="BOOK NAME" name="bookName" id="bookName"><br>
 	<strong><label>ENTER THE RETURNING BOOK QUANTITY</label></strong><br>
-	<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity"><br><br>
+	<input type="number" required placeholder="BOOK QUANTITY" name="bookQuantity" id="bookQuantity"><br><br>
 	<button class="btn btn-info">SUBMIT</button>&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
 	</form><br><br>
 	
-	
+	<h3>BOOKS TAKEN BY YOU</h3>
 	<table class="table table-hover table-dark">
 	<thead>
 	<tr>
@@ -87,4 +87,15 @@
 	</div>
 	</main>
 </body>
+<script>
+function autoLoad()
+{
+	let book=JSON.parse(localStorage.getItem("bookS"))||null;
+	if(book!=null)
+	document.querySelector("#bookName").value=book.BookName;
+	document.querySelector("#bookQuantity").value=book.Quantity;
+	localStorage.setItem("bookS",null);
+	}
+	autoLoad();
+</script>
 </html>

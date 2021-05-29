@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="in.micheal.model.BookDetail"%>
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Search_Books</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
@@ -18,8 +15,8 @@
 		<div>
 			<form onsubmit="searchResults()" method="get">
 				<strong><label>SEARCH BOOKS :</label></strong><br> <input
-					type="text" placeholder="BOOK NAME" id="bookname" name="bookname">
-				<button class="btn btn-info">SUBMIT</button>
+					type="search" placeholder="BOOK NAME" required id="bookname" name="bookname">
+				<button class="btn btn-info">SEARCH</button>
 			</form>
 			<br> <br> <label>AVAILABLE BOOKS</label>
 			<table class="table table-hover table-dark">
@@ -45,18 +42,30 @@ function searchResults()
 		let url="ViewBookByNameAction?bookName=" + bookName;
 		axios.get(url).then(res=> {
 		let searchedBooks=res.data;
+		let bookN="";
+		let quant=null;
 		let content="";
 		let i=0;
 		for(let book of searchedBooks)
 			{
 			i++;
-			content+="<tr><td>"+ i +"</td><td>"+book.bookName+"</td><td>"+book.bookQuantity+"</td></tr>";	
+			bookN=book.bookName;
+			quant=book.bookQuantity;
+			content+="<tr><td>"+ i +"</td><td>"+book.bookName+"</td><td>"+book.bookQuantity+" '</td><td><button onclick=\"saveBook(('"+bookN+"'),('"+quant+"'))\" ' class='btn btn-warning'>Take Book</button></td></tr>";
+			
 			}
-	
+			
 		document.querySelector("#book_tbl").innerHTML= content;
 
 	} );
 
+	}
+function saveBook(bookName,bookQuantity)
+{
+	event.preventDefault();
+	let bookS={"BookName":bookName,"Quantity":bookQuantity};
+	localStorage.setItem("bookS",JSON.stringify(bookS));
+	window.location = "UserLogin.jsp?errorMessage="+"Login Required";
 	}
 
 </script>

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin_Login</title>
 </head>
 <body class="rounded mx-auto d-block">
 	<jsp:include page="header.jsp"></jsp:include>
@@ -24,7 +24,7 @@
 			out.println("<font color ='red'>" +errorMessage + "</font>");
 		}
 		%>
-		<form action="AdminLoginAction" method="post" class="">
+		<form action="AdminLoginAction" method="post">
 			<strong><label>ENTER YOUR ID :</label></strong><br> 
 			<input type="number" required placeholder="ID" name="adminId" min=10000 max=10000000 autofocus><br>
 			 <strong><label>ENTER YOUR PASSWORD :</label></strong><br> 

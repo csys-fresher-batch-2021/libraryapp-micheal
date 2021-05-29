@@ -29,19 +29,6 @@ public class UserService {
 		return confirmation;
 	}
 
-	/**
-	 * This method is used to check login credentials of admin
-	 * 
-	 * @param user
-	 * @return
-	 * @throws DbException
-	 */
-	public static boolean adminLogin(UserDetails user) throws DbException {
-		boolean confirmation;
-		confirmation = UserServiceValidator.userLoginValidator(user.getUserId(), user.getAdminPassword());
-
-		return confirmation;
-	}
 
 	/**
 	 * This method is used to register users

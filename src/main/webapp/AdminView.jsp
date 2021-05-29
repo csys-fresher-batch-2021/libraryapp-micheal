@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin_View</title>
 </head>
 <body class="rounded mx-auto d-block">
 	<jsp:include page="header.jsp"></jsp:include>
@@ -24,8 +24,41 @@
 		<input type="number" required name="bookQuantity"><br><br>
 		<button class="btn btn-info">SUBMIT</button>
 		</form>
+		</div><br><br>
+		<div>
+		<button class="btn btn-info" onclick="viewAllRecords()">VIEW ALL RECORDS</button><br><br>
+		<table class="table table-hover table-dark">
+		<thead>
+			<tr>
+			<th>S.no</th>
+			<th>USER ID</th>
+			<th>TAKEN BOOK</th>
+			<th>TAKEN QUANTITY</th>
+			<th>TAKEN DATE</th>
+			</tr>
+		</thead>
+		<tbody id="allrecords"></tbody>	
+		
+		</table>
 		</div>
 		</main>
 </body>
+<script>
+function viewAllRecords(){
+	let url = "ViewAllRecords";
+	fetch(url).then(res=> res.json()).then(res=>{
+		let allRecords = res;
+		let content = "";
+		let i=0;
+		for(let user of allRecords){
+				i++;
+				content += "<tr><td>" + i + "</td><td>" + user.debtUserId +
+				"</td><td>" + user.takenBook + "</td><td>" + user.tekenBookQuantity + 
+				"</td><td>" + user.takenDate + "</td></tr>";
+			}
+		document.querySelector("#allrecords").innerHTML= content;
+	});
+}
+</script>
 
 </html>
