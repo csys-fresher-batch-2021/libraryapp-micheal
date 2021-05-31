@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin_Login</title>
 </head>
 <body class="rounded mx-auto d-block">
@@ -32,7 +33,7 @@
 			<input type="submit" value="SUBMIT" class="btn btn-primary">&nbsp;
 			<input type="reset" value="RESET" class="btn btn-danger">
 		</form>
-		<br> <a href="AdminRegistration.jsp">Register</a>
+		<br> <a href="AdminRegistration.jsp" id="link">Register</a>
 	</div>
 
 	</main>

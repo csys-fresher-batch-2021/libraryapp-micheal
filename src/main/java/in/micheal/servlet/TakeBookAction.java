@@ -27,7 +27,7 @@ public class TakeBookAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession loggedInUser = request.getSession();
-		long loggedInUsername = (long) loggedInUser.getAttribute("LOOGGED_IN_USER");
+		long loggedInUsername = (long) loggedInUser.getAttribute("LOGGED_IN_USER");
 		String bookName = request.getParameter("bookName").toUpperCase();
 		String confirmation;
 		try {

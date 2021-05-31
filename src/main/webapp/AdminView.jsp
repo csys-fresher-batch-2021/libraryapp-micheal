@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin_View</title>
 </head>
 <body class="rounded mx-auto d-block">
@@ -18,10 +19,10 @@
 		out.println("<font color='brown'>"+msg+"</font>");
 	%>
 		<form action="UploadBooksAction" method="post">
-		<label>ENTER THE BOOK NAME TO UPLOADED</label><br>
-		<input type="text" required name="bookName"><br>
-		<label>ENTER THE QUANTITY</label><br>
-		<input type="number" required name="bookQuantity"><br><br>
+		<strong><label>ENTER THE BOOK NAME TO UPLOAD</label></strong><br>
+		<input type="text" required name="bookName" placeholder="Book Name"><br>
+		<strong><label>ENTER THE QUANTITY</label></strong><br>
+		<input type="number" required name="bookQuantity" placeholder="Quantity"><br><br>
 		<button class="btn btn-info">SUBMIT</button>
 		</form>
 		</div><br><br>

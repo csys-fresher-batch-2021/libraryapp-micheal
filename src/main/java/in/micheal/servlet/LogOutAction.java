@@ -21,8 +21,8 @@ public class LogOutAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession loggedInUser = request.getSession();
 
-		loggedInUser.removeAttribute("LOOGGED_IN_USER");
-		RequestDispatcher rd = request.getRequestDispatcher("UserLogin.jsp");
+		loggedInUser.removeAttribute("LOGGED_IN_USER");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
