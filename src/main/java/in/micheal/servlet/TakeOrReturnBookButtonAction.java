@@ -26,7 +26,7 @@ public class TakeOrReturnBookButtonAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession loggedInUser = request.getSession();
-		Long loggedInUsername = (Long) loggedInUser.getAttribute("LOOGGED_IN_USER");
+		Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
 
 		String verification = request.getParameter("takeorreturnbook");
 

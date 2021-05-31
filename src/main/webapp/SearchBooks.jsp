@@ -4,6 +4,7 @@
 
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="ISO-8859-1">
 <title>Search_Books</title>
 <script
@@ -51,7 +52,7 @@ function searchResults()
 			i++;
 			bookN=book.bookName;
 			quant=book.bookQuantity;
-			content+="<tr><td>"+ i +"</td><td>"+book.bookName+"</td><td>"+book.bookQuantity+" '</td><td><button onclick=\"saveBook(('"+bookN+"'),('"+quant+"'))\" ' class='btn btn-warning'>Take Book</button></td></tr>";
+			content+="<tr><td>"+ i +"</td><td>"+book.bookName+"</td><td>"+book.bookQuantity+" </td><td><button onclick=\"saveBook(('"+bookN+"'),('"+quant+"'))\" ' class='btn btn-warning'>Take Book</button></td></tr>";
 			
 			}
 			

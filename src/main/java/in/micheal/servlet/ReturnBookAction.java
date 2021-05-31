@@ -26,7 +26,7 @@ public class ReturnBookAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession loggedInUser = request.getSession();
-		long loggedInUsername = (long) loggedInUser.getAttribute("LOOGGED_IN_USER");
+		long loggedInUsername = (long) loggedInUser.getAttribute("LOGGED_IN_USER");
 
 		BookDetail book = new BookDetail();
 		DebtUserDetail debtUser = new DebtUserDetail();

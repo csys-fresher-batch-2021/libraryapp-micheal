@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AdminLoginAction
@@ -23,6 +24,7 @@ public class AdminLoginAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String message;
+		HttpSession loggedInUser = request.getSession();
 		try {
 			long adminId = Long.parseLong(request.getParameter("adminId"));
 			String password = request.getParameter("password");
@@ -35,6 +37,7 @@ public class AdminLoginAction extends HttpServlet {
 			confirmation = UserService.userLogin(admin);
 
 			if (confirmation) {
+				loggedInUser.setAttribute("LOGGED_IN_USER", adminId);
 				RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp");
 				rd.forward(request, response);
 			} else {

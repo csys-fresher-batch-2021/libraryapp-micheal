@@ -38,9 +38,9 @@ public class UserLoginAction extends HttpServlet {
 
 			if (confirmation) {
 				String msg = "LOGIN SUCCESSFULL";
+				loggedInUser.setAttribute("LOGGED_IN_USER", userId);
 				RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp?msg=" + msg);
 				rd.forward(request, response);
-				loggedInUser.setAttribute("LOOGGED_IN_USER", userId);
 			} else {
 				String msg = "INVALID LOGIN CREDENTIALS";
 				RequestDispatcher rd = request.getRequestDispatcher("UserLogin.jsp?errorMessage=" + msg);

@@ -4,7 +4,7 @@
 
 <%
 HttpSession loggedInUser = request.getSession();
-Long loggedInUsername = (Long) loggedInUser.getAttribute("LOOGGED_IN_USER");
+Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
 %>
 
 <header>
@@ -30,8 +30,10 @@ Long loggedInUsername = (Long) loggedInUser.getAttribute("LOOGGED_IN_USER");
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
         <a class="nav-link" href="UserLogin.jsp">Login</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="AdminLogin.jsp">Admin Login</a>
       </li>
-      </ul>
+      </ul>      
       <%} else{ %>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">

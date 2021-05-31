@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="ISO-8859-1">
 <title>User Login</title>
 </head>
@@ -34,7 +35,7 @@
 		<input type="password" required name="password"><br><br>
 		<button class="btn btn-primary">SUBMIT</button> <input type="reset" class="btn btn-danger">
 		</form><br><br>
-		<a href=UserRegistration.jsp >REGISTER</a>
+		<a  href="UserRegistration.jsp" id="link">REGISTER</a>
 		</div>
 		
 		
