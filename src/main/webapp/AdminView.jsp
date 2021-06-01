@@ -12,6 +12,12 @@
 <body class="rounded mx-auto d-block">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<%
+		HttpSession loggedInUser = request.getSession();
+		Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
+		if(loggedInUsername==null)
+			response.sendRedirect("AdminLogin.jsp");
+		%>
 	<div>
 	<h3>WELCOME TO THE ADMIN PANEL</h3>
 	<%String msg=request.getParameter("msg");
