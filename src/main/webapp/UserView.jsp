@@ -13,13 +13,19 @@
 <body class="rounded mx-auto d-block">
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<%
+		HttpSession loggedInUser = request.getSession();
+		Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
+		if(loggedInUsername==null)
+			response.sendRedirect("UserLogin.jsp");
+		%>
 	<div>
 	<h3>TAKE OR RETURN BOOK</h3><br><br>
 	<form action="TakeOrReturnBookButtonAction" method="post">
-	<input type="radio"  name="takeorreturnbook" value="takeBook" required>&nbsp; &nbsp;<strong><label>TAKE BOOK</label></strong><br>
+	<input type="radio"  name="takeorreturnbook" value="takeBook" required style="margin-left:-25px">&nbsp; &nbsp;<strong><label>TAKE BOOK</label></strong><br>
 	<input type="radio"  name="takeorreturnbook" value="returnBook" required>&nbsp; &nbsp;<strong><label>RETURN BOOK</label></strong><br>
 	<button class="btn btn-info">SUBMIT</button>
-	</form><br><br>
+	</form>
 	<%String msg=request.getParameter("msg");
 	if(msg!=null)
 		out.println("<font color='brown'>"+msg+"</font>");
