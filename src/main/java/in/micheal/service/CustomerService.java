@@ -2,8 +2,6 @@ package in.micheal.service;
 
 import java.util.List;
 
-
-
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
 import in.micheal.exception.DbException;
@@ -124,6 +122,13 @@ public class CustomerService {
 
 	}
 
+	/**
+	 * Method overriding concept for getting Debt Books
+	 * 
+	 * @param debtUserId
+	 * @return
+	 * @throws DbException
+	 */
 	public static List<BookDetail> getBooks(long debtUserId) throws DbException {
 
 		List<BookDetail> debtBooks;

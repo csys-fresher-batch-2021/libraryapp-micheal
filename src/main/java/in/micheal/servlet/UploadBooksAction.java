@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.micheal.controller.Controller;
 import in.micheal.exception.DbException;
-import in.micheal.model.BookDetail;
-import in.micheal.service.AdminService;
 
 /**
  * Servlet implementation class UploadBooksAction
@@ -24,11 +23,8 @@ public class UploadBooksAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String bookName = request.getParameter("bookName").toUpperCase();
 		int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
-		BookDetail obj = new BookDetail();
-		obj.setName(bookName);
-		obj.setQuantity(bookQuantity);
 		try {
-			String confirmation = AdminService.uploadBooks(obj);
+			String confirmation = Controller.uploadBooksController(bookName, bookQuantity);
 			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?msg=" + confirmation);
 			rd.forward(request, response);
 		} catch (DbException | ServletException | IOException e) {
