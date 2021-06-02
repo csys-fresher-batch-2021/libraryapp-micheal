@@ -1,5 +1,7 @@
 package in.micheal.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import in.micheal.dao.BookDetailsDAO;
@@ -70,36 +72,41 @@ public class CustomerService {
 
 	public static String returnBook(DebtUserDetail userObj) throws DbException {
 		String confirmation = null;
-		boolean isDebtUser = false;
-		int takenBookQuantity = 0;
+		long fineAmount = CustomerService.calculateFine(userObj.getDebtUserId(), userObj.getTakenBook());
+		if (fineAmount == 0) {
+			boolean isDebtUser = false;
+			int takenBookQuantity = 0;
 
-		isDebtUser = DebtUserValidator.isDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
-		if (!isDebtUser) {
+			isDebtUser = DebtUserValidator.isDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+			if (!isDebtUser) {
 
-			confirmation = "YOU DIDNT TOOK THIS BOOK";
+				confirmation = "YOU DIDNT TOOK THIS BOOK";
+			} else {
+
+				takenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userObj.getDebtUserId(),
+						userObj.getTakenBook());
+
+			}
+			int remainingBook = takenBookQuantity - userObj.getTekenBookQuantity();
+			if (remainingBook < 0) {
+				confirmation = "YOUR RETURNING TOO MUCH BOOKS";
+			} else if (remainingBook > 0) {
+				confirmation = "YOU RETURNED SOME BOOKS";
+				int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+						+ userObj.getTekenBookQuantity();
+				BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+				DebtUserDetailsDAO.updateBookQuantity(userObj.getTakenBook(), remainingBook, userObj.getDebtUserId());
+
+			} else if (remainingBook == 0) {
+				confirmation = "YOU RETURNED ALL BOOKS";
+				DebtUserDetailsDAO.deleteDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+				int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+						+ userObj.getTekenBookQuantity();
+				BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+
+			}
 		} else {
-
-			takenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userObj.getDebtUserId(),
-					userObj.getTakenBook());
-
-		}
-		int remainingBook = takenBookQuantity - userObj.getTekenBookQuantity();
-		if (remainingBook < 0) {
-			confirmation = "YOUR RETURNING TOO MUCH BOOKS";
-		} else if (remainingBook > 0) {
-			confirmation = "YOU RETURNED SOME BOOKS";
-			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
-					+ userObj.getTekenBookQuantity();
-			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
-			DebtUserDetailsDAO.updateBookQuantity(userObj.getTakenBook(), remainingBook, userObj.getDebtUserId());
-
-		} else if (remainingBook == 0) {
-			confirmation = "YOU RETURNED ALL BOOKS";
-			DebtUserDetailsDAO.deleteDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
-			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
-					+ userObj.getTekenBookQuantity();
-			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
-
+			confirmation = "PLEASE PAY THE FINE FOR DELAYING THE RETURNING OF THE BOOKS";
 		}
 		return confirmation;
 
@@ -136,6 +143,29 @@ public class CustomerService {
 		debtBooks = DebtUserDetailsDAO.searchBooks(debtUserId);
 
 		return debtBooks;
+	}
+
+	/**
+	 * This method is used to calculate fine amount of a indivduals
+	 * @param userId
+	 * @param bookName
+	 * @return
+	 * @throws DbException
+	 */
+	public static Long calculateFine(Long userId, String bookName) throws DbException {
+		String bookTakenDate = DebtUserDetailsDAO.getDate(userId, bookName).toString();
+		String currentDate = LocalDate.now().toString();
+		long fineAmount = 0;
+
+		LocalDate takenDate = LocalDate.parse(bookTakenDate);
+		LocalDate currDate = LocalDate.parse(currentDate);
+
+		long noOfDaysBetween = ChronoUnit.DAYS.between(takenDate, currDate);
+		if (noOfDaysBetween > 3) {
+			Long fineDay = noOfDaysBetween - 3;
+			fineAmount = fineDay * DebtUserDetailsDAO.getTakenBookQuantity(userId, bookName) * 5;
+		}
+		return fineAmount;
 	}
 
 }
