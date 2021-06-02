@@ -19,13 +19,14 @@
 		if(loggedInUsername==null)
 			response.sendRedirect("UserLogin.jsp");
 		%>
+		
 	<div>
 	<h3>TAKE OR RETURN BOOK</h3><br><br>
 	<form action="TakeOrReturnBookButtonAction" method="post">
 	<input type="radio"  name="takeorreturnbook" value="takeBook" required style="margin-left:-25px">&nbsp; &nbsp;<strong><label>TAKE BOOK</label></strong><br>
 	<input type="radio"  name="takeorreturnbook" value="returnBook" required>&nbsp; &nbsp;<strong><label>RETURN BOOK</label></strong><br>
 	<button class="btn btn-info">SUBMIT</button>
-	</form>
+	</form><br>
 	<%String msg=request.getParameter("msg");
 	if(msg!=null)
 		out.println("<font color='brown'>"+msg+"</font>");

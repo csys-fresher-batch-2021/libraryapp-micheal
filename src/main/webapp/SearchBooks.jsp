@@ -13,10 +13,11 @@
 <body class="rounded mx-auto d-block">
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	
 		<div>
 			<form onsubmit="searchResults()" method="get">
-				<strong><label>SEARCH BOOKS :</label></strong><br> <input
-					type="search" placeholder="BOOK NAME" required id="bookname" name="bookname">
+			<h3>SEARCH BOOKS</h3><br>
+				<input type="search" placeholder="BOOK NAME" required id="bookname" name="bookname">
 				<button class="btn btn-info">SEARCH</button>
 			</form>
 			<br> <br> <label>AVAILABLE BOOKS</label>

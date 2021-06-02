@@ -287,4 +287,60 @@ public class DebtUserDetailsDAO {
 
 	}
 
+	/**
+	 * This method is used to get the taken date of the books
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws DbException
+	 */
+	public static Date getDate(long userId, String bookName) throws DbException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		java.sql.Date date = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String sql = "select taken_date from debtuser_db where user_id=? AND taken_book=?";
+			pst = con.prepareStatement(sql);
+			pst.setLong(1, userId);
+			pst.setString(2, bookName);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+
+				date = rs.getDate("taken_date");
+
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DbException("UNABLE TO SEARCH BOOKS");
+		} finally {
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return date;
+
+	}
+
+	public static void updateDate(long userId, java.sql.Date date, String bookName) throws DbException {
+		Connection con = null;
+		PreparedStatement pst = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String sql = "update debtuser_db set taken_date= ? where taken_book = ? AND user_id=?";
+			pst = con.prepareStatement(sql);
+
+			pst.setDate(1, date);
+			pst.setString(2, bookName);
+			pst.setLong(3, userId);
+			pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DbException("UNABLE TO UPDATE BOOK QUANTITY");
+		} finally {
+			ConnectionUtil.close(pst, con);
+		}
+
+	}
+
 }

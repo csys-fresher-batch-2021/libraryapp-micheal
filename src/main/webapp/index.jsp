@@ -10,6 +10,11 @@
 	<main class="container-fluid">
 		<div>
 			<h3>Welcome To Library Management</h3>
+		</div><br>
+		<div><h3>USER NOTE:</h3><br><br>
+		<p>A user can take a book for free for only three days <br>
+		after that  a user can return book only after paying the fine amount<br>
+		after three days the fine amount will be 5 Rs per book for each day</p> 
 		</div>
 
 		<div style="text-align: center; padding: 1em 0;" class="timer">

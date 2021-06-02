@@ -1,5 +1,7 @@
 package in.micheal.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import in.micheal.dao.BookDetailsDAO;
@@ -46,8 +48,19 @@ public class AdminService {
 	 * @throws DbException
 	 */
 	public static List<DebtUserDetail> getAllDebtRecords() throws DbException {
-		List<DebtUserDetail> allRecords = DebtUserDetailsDAO.getAllRecords();
-		return allRecords;
+		return DebtUserDetailsDAO.getAllRecords();
 
+	}
+
+	/**
+	 * This function is used to update the date in debtuser databse
+	 * 
+	 * @param userId
+	 * @param bookName
+	 * @throws DbException
+	 */
+	public static void payFine(long userId, String bookName) throws DbException {
+		Date date = Date.valueOf(LocalDate.now());
+		DebtUserDetailsDAO.updateDate(userId, date, bookName);
 	}
 }
