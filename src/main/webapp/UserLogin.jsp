@@ -12,7 +12,6 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 	<div>
-	<h3>USER LOGIN</h3>
 		<%
 		String Message = request.getParameter("msg");
 		if(Message != null){
@@ -28,7 +27,8 @@
 		
 		
 		
-		<form action="UserLoginAction" method="post" >
+		<form action="UserLoginAction" method="post" id="logreg">
+			<h3>USER LOGIN</h3>
 		<strong><label>ENTER YOUR USER ID</label></strong><br>
 		<input type="number" required min=10000 max=10000000 autofocus name="userId" ><br>
 		<strong><label>ENTER YOUR PASSWORD</label></strong><br>

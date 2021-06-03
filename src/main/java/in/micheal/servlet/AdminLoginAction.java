@@ -27,7 +27,7 @@ public class AdminLoginAction extends HttpServlet {
 		HttpSession loggedInUser = request.getSession();
 		try {
 			long adminId = Long.parseLong(request.getParameter("adminId"));
-			String password = request.getParameter("password");
+			String password = (request.getParameter("password"));
 
 			UserDetails admin = new UserDetails();
 			admin.setUserId(adminId);

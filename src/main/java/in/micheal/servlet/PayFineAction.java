@@ -23,7 +23,7 @@ public class PayFineAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			long userId = Long.parseLong(request.getParameter("userid"));
-			String bookName = request.getParameter("bookname");
+			String bookName = (request.getParameter("bookname")).toUpperCase();
 			AdminService.payFine(userId, bookName);
 			String fineMsg = "RENEWED SUCCESSFULLY";
 			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?fineMsg=" + fineMsg);
