@@ -11,7 +11,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 	<div>
-		<h3>ADMIN LOGIN</h3>
 		<%
 		String infoMessage = request.getParameter("infoMessage");
 		if (infoMessage != null) {
@@ -25,11 +24,12 @@
 			out.println("<font color ='red'>" +errorMessage + "</font>");
 		}
 		%>
-		<form action="AdminLoginAction" method="post">
+		<form action="AdminLoginAction" method="post" id="logreg">
+		<h3>ADMIN LOGIN</h3>
 			<strong><label>ENTER YOUR ID :</label></strong><br> 
 			<input type="number" required placeholder="ID" name="adminId" min=10000 max=10000000 autofocus><br>
 			 <strong><label>ENTER YOUR PASSWORD :</label></strong><br> 
-				<input type="password" name="password" required placeholder="PASSWORD"><br> <br>
+				<input type="password" name="password" required placeholder="PASSWORD" pattern="^[a-zA-Z0-9+_.-]+@lib_987+$" ><br> <br>
 			<input type="submit" value="SUBMIT" class="btn btn-primary">&nbsp;
 			<input type="reset" value="RESET" class="btn btn-danger">
 		</form>

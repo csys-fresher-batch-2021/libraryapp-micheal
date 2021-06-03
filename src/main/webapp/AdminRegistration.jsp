@@ -19,7 +19,7 @@
 		}
 		%>
 		<div>
-	<form action="AdminRegistrationAction" method="get">
+	<form action="AdminRegistrationAction" method="get" id="logreg">
 			<h3>ADMIN REGISTRATION</h3>
 			<strong><label>ENTER YOUR NAME</label></strong><br>
 			<input type="text" required placeholder="NAME" autofocus name=adminName><br>

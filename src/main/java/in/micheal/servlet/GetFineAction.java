@@ -23,7 +23,7 @@ public class GetFineAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			long userId = Long.parseLong(request.getParameter("userid"));
-			String bookName = request.getParameter("bookname");
+			String bookName = (request.getParameter("bookname")).toUpperCase();
 
 			String fineAmount = CustomerService.calculateFine(userId, bookName).toString();
 			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?fineamount=" + fineAmount);

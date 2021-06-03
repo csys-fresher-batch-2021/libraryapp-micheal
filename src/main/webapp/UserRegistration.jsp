@@ -11,7 +11,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 	<div>
-	<h3>USER REGISTRATION</h3>
+	
 	<%
 		String msg = request.getParameter("msg");
 		if(msg != null){
@@ -20,7 +20,8 @@
 		%>
 		
 			
-			<form action="UserRegistrationAction" method="post">
+			<form action="UserRegistrationAction" method="post" id="logreg">
+			<h3>USER REGISTRATION</h3>
 			<strong><label>ENTER YOU NAME</label></strong><br>
 			<input type="text" required name="userName"><br>
 		<strong><label>ENTER YOUR USER ID</label></strong><br>

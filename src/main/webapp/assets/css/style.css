@@ -10,17 +10,13 @@ div {
 	text-align: center;
 }
 
-
-
 form {
 	background-color: rgba(209, 193, 193, 0.44);
 	margin-right: 30%;
 	margin-left: 30%;
-	margin-top:10%;
+	margin-top: 10%;
 	border-radius: 30px;
 	padding: 10px;
-	border: black;
-	border-color: black;
 	border: 5px solid #996666;
 }
 
@@ -31,12 +27,21 @@ input {
 label {
 	color: rgb(51, 51, 255);
 }
-#link{
-	color:rgb(51, 51, 0);
-}
-#link:hover{
-	background-color:blue;
-	padding:2px;
-	border-radius:10px;
+
+#link {
+	color: rgb(51, 51, 0);
 }
 
+#link:hover {
+	background-color: blue;
+	padding: 2px;
+	border-radius: 10px;
+}
+
+#searchbooks, #logreg,#uploadBooks {
+	margin-top: 50px;
+}
+
+#useroptions {
+	margin-top: 0;
+}

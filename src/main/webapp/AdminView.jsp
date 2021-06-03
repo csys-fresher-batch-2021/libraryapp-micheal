@@ -18,13 +18,13 @@
 		if(loggedInUsername==null)
 			response.sendRedirect("AdminLogin.jsp");
 		%>
+		<div><h3>WELCOME TO THE ADMIN PANEL</h3></div>
 	<div>
-	<h3>WELCOME TO THE ADMIN PANEL</h3>
 	<%String msg=request.getParameter("msg");
 	if(msg!=null)
 		out.println("<font color='brown'>"+msg+"</font>");
 	%>
-		<form action="UploadBooksAction" method="post">
+		<form action="UploadBooksAction" method="post" id="uploadBooks">
 		<h3>UPLOAD BOOKS</h3>
 		<strong><label>ENTER THE BOOK NAME TO UPLOAD</label></strong><br>
 		<input type="text" required name="bookName" placeholder="Book Name"><br>

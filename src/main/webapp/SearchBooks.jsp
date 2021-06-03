@@ -15,7 +15,7 @@
 	<main class="container-fluid">
 	
 		<div>
-			<form onsubmit="searchResults()" method="get">
+			<form onsubmit="searchResults()" method="get" id="searchbooks">
 			<h3>SEARCH BOOKS</h3><br>
 				<input type="search" placeholder="BOOK NAME" required id="bookname" name="bookname">
 				<button class="btn btn-info">SEARCH</button>
