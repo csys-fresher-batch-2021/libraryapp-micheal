@@ -29,7 +29,7 @@
 			<strong><label>ENTER YOUR ID :</label></strong><br> 
 			<input type="number" required placeholder="ID" name="adminId" min=10000 max=10000000 autofocus><br>
 			 <strong><label>ENTER YOUR PASSWORD :</label></strong><br> 
-				<input type="password" name="password" required placeholder="PASSWORD" pattern="^[a-zA-Z0-9+_.-]+@lib_987+$" ><br> <br>
+				<input type="password" name="password" required placeholder="PASSWORD" ><br> <br>
 			<input type="submit" value="SUBMIT" class="btn btn-primary">&nbsp;
 			<input type="reset" value="RESET" class="btn btn-danger">
 		</form>

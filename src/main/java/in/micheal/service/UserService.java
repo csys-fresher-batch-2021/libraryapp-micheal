@@ -1,5 +1,6 @@
 package in.micheal.service;
 
+import in.micheal.dao.DebtUsersFineDAO;
 import in.micheal.dao.UserDetailsDAO;
 import in.micheal.exception.DbException;
 import in.micheal.exception.InValidPasswordException;

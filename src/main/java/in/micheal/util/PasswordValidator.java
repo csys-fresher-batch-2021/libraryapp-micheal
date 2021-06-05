@@ -12,4 +12,6 @@ public class PasswordValidator {
 			throw new InValidPasswordException("TOO WEAK PASSWORD");
 		}
 	}
+
+	
 }

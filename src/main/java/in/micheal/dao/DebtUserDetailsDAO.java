@@ -260,7 +260,7 @@ public class DebtUserDetailsDAO {
 		List<DebtUserDetail> searchResults = new ArrayList<>();
 		try {
 			con = ConnectionUtil.getConnection();
-			String sql = "select * from debtuser_db";
+			String sql = "select * from debtuser_db  order by taken_date desc";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -341,6 +341,69 @@ public class DebtUserDetailsDAO {
 			ConnectionUtil.close(pst, con);
 		}
 
+	}
+
+	public static List<DebtUserDetail> getDebtUserOfId(long userID) throws DbException {
+		List<DebtUserDetail> resultDebtUser = new ArrayList<DebtUserDetail>();
+		Long userid = null;
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String sql = "select * from debtuser_db where user_id=?";
+			pst = con.prepareStatement(sql);
+			pst.setDouble(1, userID);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				DebtUserDetail user = new DebtUserDetail();
+				userid = rs.getLong("user_id");
+				String bookName = rs.getString("taken_book");
+				int quantity = rs.getInt("taken_quantity");
+				Date date = rs.getDate("taken_date");
+				user.setDebtUserId(userid);
+				user.setTakenBook(bookName);
+				user.setTakenDate(date);
+				user.setTekenBookQuantity(quantity);
+				resultDebtUser.add(user);
+
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DbException("CANNOT FIND DEBT USER");
+		} finally {
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return resultDebtUser;
+	}
+	
+	public static List<Long> getAllUser() throws DbException{
+		
+		
+		List<Long> resultDebtUser = new ArrayList<Long>();
+		Long userid = null;
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+		try {
+			con = ConnectionUtil.getConnection();
+			String sql = "select user_id from debtuser_db";
+			pst = con.prepareStatement(sql);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				userid = rs.getLong("user_id");
+				resultDebtUser.add(userid);
+
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new DbException("CANNOT FIND DEBT USER");
+		} finally {
+			ConnectionUtil.close(rs, pst, con);
+		}
+		return resultDebtUser;
 	}
 
 }

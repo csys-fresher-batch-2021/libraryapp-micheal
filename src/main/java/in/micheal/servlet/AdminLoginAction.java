@@ -1,10 +1,12 @@
 package in.micheal.servlet;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import in.micheal.exception.DbException;
 import in.micheal.model.UserDetails;
 import in.micheal.service.UserService;
+import in.micheal.util.PasswordValidator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,20 +26,19 @@ public class AdminLoginAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String message;
-		HttpSession loggedInUser = request.getSession();
+		HttpSession adminUser = request.getSession();
+
 		try {
 			long adminId = Long.parseLong(request.getParameter("adminId"));
 			String password = (request.getParameter("password"));
-
 			UserDetails admin = new UserDetails();
 			admin.setUserId(adminId);
 			admin.setPassword(password);
-			boolean confirmation;
 
-			confirmation = UserService.userLogin(admin);
+			boolean confirmation = UserService.userLogin(admin);
 
 			if (confirmation) {
-				loggedInUser.setAttribute("LOGGED_IN_USER", adminId);
+				adminUser.setAttribute("LOGGED_IN_USER", adminId);
 				RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp");
 				rd.forward(request, response);
 			} else {
@@ -53,7 +54,6 @@ public class AdminLoginAction extends HttpServlet {
 			} catch (ServletException | IOException e1) {
 				e1.printStackTrace();
 			}
-
 		}
 
 	}

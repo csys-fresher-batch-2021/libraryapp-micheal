@@ -20,8 +20,10 @@ public class LogOutAction extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession loggedInUser = request.getSession();
+		HttpSession adminUser = request.getSession();
 
 		loggedInUser.removeAttribute("LOGGED_IN_USER");
+		adminUser.removeAttribute("LOGGED_IN_USER");
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		try {
 			rd.forward(request, response);
