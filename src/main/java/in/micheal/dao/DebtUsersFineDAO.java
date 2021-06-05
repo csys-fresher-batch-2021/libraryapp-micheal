@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.micheal.constants.MessageConstants;
 import in.micheal.exception.DbException;
 import in.micheal.model.DebtUserDetail;
 import in.micheal.util.ConnectionUtil;
@@ -40,7 +41,7 @@ public class DebtUsersFineDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND AT THIS TIME");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -69,7 +70,7 @@ public class DebtUsersFineDAO {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("UNABLE TO ADD FINE ");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -99,7 +100,7 @@ public class DebtUsersFineDAO {
 
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO FETCH DATAS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 
@@ -129,7 +130,7 @@ public class DebtUsersFineDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO UPDATE FINE");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}
@@ -144,8 +145,8 @@ public class DebtUsersFineDAO {
 	 */
 	public static List<DebtUserDetail> getAll() throws DbException {
 
-		List<DebtUserDetail> resultDebtUser = new ArrayList<DebtUserDetail>();
-		Long userid = null;
+		List<DebtUserDetail> resultDebtUser = new ArrayList<>();
+		Long userId = null;
 		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement pst = null;
@@ -157,16 +158,16 @@ public class DebtUsersFineDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				DebtUserDetail user = new DebtUserDetail();
-				userid = rs.getLong("user_id");
+				userId = rs.getLong("user_id");
 				int fineAmount = rs.getInt("fine_amount");
-				user.setDebtUserId(userid);
+				user.setDebtUserId(userId);
 				user.setFineAmount(fineAmount);
 				resultDebtUser.add(user);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}

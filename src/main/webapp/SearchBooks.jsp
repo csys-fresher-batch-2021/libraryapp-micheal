@@ -22,11 +22,12 @@
 			</form>
 			<br> <br> <label>AVAILABLE BOOKS</label>
 			<table class="table table-hover table-dark">
+			<caption>All available books</caption>
 				<thead>
 					<tr>
-						<th>S.no</th>
-						<th>BOOK NAME</th>
-						<th>QUANTITY</th>
+						<th scope="col">S.no</th>
+						<th scope="col">BOOK NAME</th>
+						<th scope="col">QUANTITY</th>
 					</tr>
 				</thead>
 				<tbody id="book_tbl">

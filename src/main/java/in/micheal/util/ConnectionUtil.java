@@ -11,10 +11,10 @@ public class ConnectionUtil {
 		// Default constructor
 	}
 
-	private static final String DriverClass = System.getenv("spring.datasource.driver-class-name");
-	private static final String Url = "jdbc:postgresql://projecttracker.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
-	private static final String Username = System.getenv("spring.datasource.username");
-	private static final String Password = System.getenv("spring.datasource.password");
+	private static final String DRIVER_CLASS = System.getenv("spring.datasource.driver-class-name");
+	private static final String URL = "jdbc:postgresql://projecttracker.ck1ayq0lncmp.ap-south-1.rds.amazonaws.com/bankapp_db";
+	private static final String USERNAME = System.getenv("spring.datasource.username");
+	private static final String PASSWORD = System.getenv("spring.datasource.password");
 
 	/**
 	 * This method establishes connection between core JAVA and database
@@ -26,9 +26,9 @@ public class ConnectionUtil {
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 
-		Class.forName(DriverClass);
+		Class.forName(DRIVER_CLASS);
 
-		return DriverManager.getConnection(Url, Username, Password);
+		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 	}
 
 	/**

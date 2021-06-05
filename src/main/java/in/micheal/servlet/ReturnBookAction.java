@@ -30,21 +30,21 @@ public class ReturnBookAction extends HttpServlet {
 
 		BookDetail book = new BookDetail();
 		DebtUserDetail debtUser = new DebtUserDetail();
+		String confirmation = null;
 
 		String bookName = request.getParameter("bookName").toUpperCase();
-		int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
-
-		book.setName(bookName);
-		book.setQuantity(bookQuantity);
-
-		debtUser.setDebtUserId(loggedInUsername);
-		debtUser.setTakenBook(bookName);
-		debtUser.setTekenBookQuantity(bookQuantity);
-
-		String confirmation = null;
 		try {
+			int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
+
+			book.setName(bookName);
+			book.setQuantity(bookQuantity);
+
+			debtUser.setDebtUserId(loggedInUsername);
+			debtUser.setTakenBook(bookName);
+			debtUser.setTekenBookQuantity(bookQuantity);
+
 			confirmation = CustomerService.returnBook(debtUser);
-		} catch (DbException e) {
+		} catch (DbException | NumberFormatException e) {
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp?msg=" + confirmation);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import in.micheal.constants.MessageConstants;
 import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
@@ -44,7 +45,7 @@ public class DebtUserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT ADD DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -60,8 +61,8 @@ public class DebtUserDetailsDAO {
 	 * @return
 	 * @throws DbException
 	 */
-	public static Long findDebtUser(Long userID, String bookName) throws DbException {
-		Long userid = null;
+	public static Long findDebtUser(Long userId, String bookName) throws DbException {
+		Long userIdentify = null;
 		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement pst = null;
@@ -69,21 +70,21 @@ public class DebtUserDetailsDAO {
 			con = ConnectionUtil.getConnection();
 			String sql = "select user_id from debtuser_db where user_id=? AND taken_book=?";
 			pst = con.prepareStatement(sql);
-			pst.setDouble(1, userID);
+			pst.setDouble(1, userId);
 			pst.setString(2, bookName);
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				userid = rs.getLong("user_id");
+				userIdentify = rs.getLong(MessageConstants.USER_ID);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
-		return userid;
+		return userIdentify;
 	}
 
 	/**
@@ -110,11 +111,11 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				takenQuantity = rs.getInt("taken_quantity");
+				takenQuantity = rs.getInt(MessageConstants.QUANTITY);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND THE TAKEN BOOK QUANTITY");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -146,7 +147,7 @@ public class DebtUserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO UPDATE BOOK QUANTITY");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}
@@ -175,7 +176,7 @@ public class DebtUserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO DELETE DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 
@@ -200,7 +201,7 @@ public class DebtUserDetailsDAO {
 			pst = con.prepareStatement(sql);
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO DELETE ALL RECORDS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 
@@ -229,17 +230,17 @@ public class DebtUserDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("taken_book");
-				int bookquantity = rs.getInt("taken_quantity");
+				String bookName = rs.getString(MessageConstants.BOOK);
+				int bookQuantity = rs.getInt(MessageConstants.QUANTITY);
 
 				BookDetail books = new BookDetail();
-				books.setName(bookname);
-				books.setQuantity(bookquantity);
+				books.setName(bookName);
+				books.setQuantity(bookQuantity);
 				searchResults.add(books);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -264,22 +265,21 @@ public class DebtUserDetailsDAO {
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("taken_book");
-				int bookquantity = rs.getInt("taken_quantity");
-				Date takenDate = rs.getDate("taken_date");
-				int userId = rs.getInt("user_id");
+				String bookName = rs.getString(MessageConstants.BOOK);
+				int bookQuantity = rs.getInt(MessageConstants.QUANTITY);
+				Date takenDate = rs.getDate(MessageConstants.DATE);
+				int userId = rs.getInt(MessageConstants.USER_ID);
 
 				DebtUserDetail user = new DebtUserDetail();
-				user.setTakenBook(bookname);
-				user.setTekenBookQuantity(bookquantity);
-				user.setDebtUserId(bookquantity);
+				user.setTakenBook(bookName);
+				user.setTekenBookQuantity(bookQuantity);
 				user.setDebtUserId(userId);
 				user.setTakenDate(takenDate);
 				searchResults.add(user);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -309,12 +309,12 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				date = rs.getDate("taken_date");
+				date = rs.getDate(MessageConstants.DATE);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -336,7 +336,7 @@ public class DebtUserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO UPDATE BOOK QUANTITY");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}
@@ -344,7 +344,7 @@ public class DebtUserDetailsDAO {
 	}
 
 	public static List<DebtUserDetail> getDebtUserOfId(long userID) throws DbException {
-		List<DebtUserDetail> resultDebtUser = new ArrayList<DebtUserDetail>();
+		List<DebtUserDetail> resultDebtUser = new ArrayList<>();
 		Long userid = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -358,10 +358,10 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				DebtUserDetail user = new DebtUserDetail();
-				userid = rs.getLong("user_id");
-				String bookName = rs.getString("taken_book");
-				int quantity = rs.getInt("taken_quantity");
-				Date date = rs.getDate("taken_date");
+				userid = rs.getLong(MessageConstants.USER_ID);
+				String bookName = rs.getString(MessageConstants.BOOK);
+				int quantity = rs.getInt(MessageConstants.QUANTITY);
+				Date date = rs.getDate(MessageConstants.DATE);
 				user.setDebtUserId(userid);
 				user.setTakenBook(bookName);
 				user.setTakenDate(date);
@@ -371,17 +371,16 @@ public class DebtUserDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
 		return resultDebtUser;
 	}
-	
-	public static List<Long> getAllUser() throws DbException{
-		
-		
-		List<Long> resultDebtUser = new ArrayList<Long>();
+
+	public static List<Long> getAllUser() throws DbException {
+
+		List<Long> resultDebtUser = new ArrayList<>();
 		Long userid = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -393,13 +392,13 @@ public class DebtUserDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				userid = rs.getLong("user_id");
+				userid = rs.getLong(MessageConstants.USER_ID);
 				resultDebtUser.add(userid);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
