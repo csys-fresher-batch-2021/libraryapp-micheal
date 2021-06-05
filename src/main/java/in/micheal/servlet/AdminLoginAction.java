@@ -1,12 +1,10 @@
 package in.micheal.servlet;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 import in.micheal.exception.DbException;
 import in.micheal.model.UserDetails;
 import in.micheal.service.UserService;
-import in.micheal.util.PasswordValidator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
