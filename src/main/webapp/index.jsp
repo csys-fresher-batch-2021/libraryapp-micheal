@@ -22,9 +22,9 @@
 				<a style="text-decoration: none;"
 					href="https://www.zeitverschiebung.net/en/country/in"></a>
 			</h3>
-			<iframe
+			<iframe title="time"
 				src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=medium&timezone=Asia%2FKolkata"
-				width="100%" height="115" frameborder="0" seamless></iframe>
+				width="100%" height="115"  seamless></iframe>
 		</div>
 
 

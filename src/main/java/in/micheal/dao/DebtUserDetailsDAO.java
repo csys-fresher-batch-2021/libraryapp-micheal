@@ -18,6 +18,11 @@ public class DebtUserDetailsDAO {
 		// default constructor
 	}
 
+	static final String BOOK = "taken_book";
+	static final String DATE = "taken_date";
+	static final String USER_ID = "user_id";
+	static final String QUANTITY="taken_quantity";
+
 	/**
 	 * This method adds debt users to debt users
 	 * 
@@ -74,7 +79,7 @@ public class DebtUserDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				userid = rs.getLong("user_id");
+				userid = rs.getLong(USER_ID);
 
 			}
 
@@ -110,7 +115,7 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				takenQuantity = rs.getInt("taken_quantity");
+				takenQuantity = rs.getInt(QUANTITY);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -229,8 +234,8 @@ public class DebtUserDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("taken_book");
-				int bookquantity = rs.getInt("taken_quantity");
+				String bookname = rs.getString(BOOK);
+				int bookquantity = rs.getInt(QUANTITY);
 
 				BookDetail books = new BookDetail();
 				books.setName(bookname);
@@ -239,7 +244,7 @@ public class DebtUserDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException("UNABLE TO SEARCH BOOKS,TRY AGAIN FOR THE GIVEN USER_ID TRY AGAIN");
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -264,10 +269,10 @@ public class DebtUserDetailsDAO {
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("taken_book");
-				int bookquantity = rs.getInt("taken_quantity");
-				Date takenDate = rs.getDate("taken_date");
-				int userId = rs.getInt("user_id");
+				String bookname = rs.getString(BOOK);
+				int bookquantity = rs.getInt(QUANTITY);
+				Date takenDate = rs.getDate(DATE);
+				int userId = rs.getInt(USER_ID);
 
 				DebtUserDetail user = new DebtUserDetail();
 				user.setTakenBook(bookname);
@@ -279,7 +284,7 @@ public class DebtUserDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException("UNABLE TO GET RECORDS ,TRY AGAIN");
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -309,12 +314,12 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
-				date = rs.getDate("taken_date");
+				date = rs.getDate(DATE);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException("UNABLE TO GET DATE,TRY AGAIN");
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -344,7 +349,7 @@ public class DebtUserDetailsDAO {
 	}
 
 	public static List<DebtUserDetail> getDebtUserOfId(long userID) throws DbException {
-		List<DebtUserDetail> resultDebtUser = new ArrayList<DebtUserDetail>();
+		List<DebtUserDetail> resultDebtUser = new ArrayList<>();
 		Long userid = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -358,10 +363,10 @@ public class DebtUserDetailsDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				DebtUserDetail user = new DebtUserDetail();
-				userid = rs.getLong("user_id");
-				String bookName = rs.getString("taken_book");
-				int quantity = rs.getInt("taken_quantity");
-				Date date = rs.getDate("taken_date");
+				userid = rs.getLong(USER_ID);
+				String bookName = rs.getString(BOOK);
+				int quantity = rs.getInt(QUANTITY);
+				Date date = rs.getDate(DATE);
 				user.setDebtUserId(userid);
 				user.setTakenBook(bookName);
 				user.setTakenDate(date);
@@ -371,17 +376,16 @@ public class DebtUserDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException("CANNOT GET DEBT_ID USER");
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
 		return resultDebtUser;
 	}
-	
-	public static List<Long> getAllUser() throws DbException{
-		
-		
-		List<Long> resultDebtUser = new ArrayList<Long>();
+
+	public static List<Long> getAllUser() throws DbException {
+
+		List<Long> resultDebtUser = new ArrayList<>();
 		Long userid = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -393,13 +397,13 @@ public class DebtUserDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				userid = rs.getLong("user_id");
+				userid = rs.getLong(USER_ID);
 				resultDebtUser.add(userid);
 
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("CANNOT FIND DEBT USER");
+			throw new DbException("CANNOT GET DEBT USER,TRY AGAIN");
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}

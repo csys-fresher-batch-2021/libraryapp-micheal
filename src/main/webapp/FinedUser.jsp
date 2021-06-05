@@ -13,11 +13,12 @@
 	<h3>ALL RECORDS</h3><br><br>
 
 <table class="table table-hover table-dark">
+<caption>Fined Users</caption>
 		<thead>
 			<tr>
-			<th>S.no</th>
-			<th>USER ID</th>
-			<th>FINE AMOUNT</th>
+			<th scope="col">S.no</th>
+			<th scope="col">USER ID</th>
+			<th scope="col">FINE AMOUNT</th>
 			
 			</tr>
 		</thead>

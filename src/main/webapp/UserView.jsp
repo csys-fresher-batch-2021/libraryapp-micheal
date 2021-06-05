@@ -64,11 +64,12 @@
 	
 	<h3>BOOKS TAKEN BY YOU</h3>
 	<table class="table table-hover table-dark">
+	<caption>Books that are taken by you</caption>
 	<thead>
 	<tr>
-				<th>S.no</th>
-				<th>BOOK NAME</th>
-				<th>QUANTITY</th>
+				<th scope="col">S.no</th>
+				<th scope="col">BOOK NAME</th>
+				<th scope="col">QUANTITY</th>
 			</tr>
 	</thead>
 	<tbody>

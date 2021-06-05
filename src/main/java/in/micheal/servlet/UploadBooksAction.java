@@ -22,8 +22,9 @@ public class UploadBooksAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String bookName = request.getParameter("bookName").toUpperCase();
-		int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
 		try {
+			int bookQuantity = Integer.parseInt(request.getParameter("bookQuantity"));
+
 			String confirmation = Controller.uploadBooksController(bookName, bookQuantity);
 			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?msg=" + confirmation);
 			rd.forward(request, response);

@@ -144,7 +144,7 @@ public class DebtUsersFineDAO {
 	 */
 	public static List<DebtUserDetail> getAll() throws DbException {
 
-		List<DebtUserDetail> resultDebtUser = new ArrayList<DebtUserDetail>();
+		List<DebtUserDetail> resultDebtUser = new ArrayList<>();
 		Long userid = null;
 		Connection con = null;
 		ResultSet rs = null;
