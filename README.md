@@ -11,10 +11,10 @@
  
  5.if a user fail to return the book within three days he/she should pay fine for each books per day
  
- 6.A user cannot return the book without paying the fine
+ 6.A user cannot Take the book without paying the fine but he/She can return book
  
- 7.User can pay the fine to admin
+ 7.User can pay the fine to admin,Once the admin pay the Fine the fine amount will be updated to 0,
  
- 8.admin will renew the fine amount of a user
+
   
 
