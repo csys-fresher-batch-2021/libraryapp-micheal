@@ -9,6 +9,18 @@
 <body>
 <jsp:include page="AdminHeader.jsp"></jsp:include>
 	<main class="container-fluid">
+	<%
+		HttpSession AdminUser = request.getSession();
+		Long loggedInUsername = (Long) AdminUser.getAttribute("LOGGED_IN_USER");
+		if(loggedInUsername==null){
+			response.sendRedirect("AdminLogin.jsp");
+		}
+		else {
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			response.setHeader("Pragma", "no-cache"); 
+			response.setDateHeader("Expires", 0);
+		}
+		%>
 	
 	<h3>ALL RECORDS</h3><br><br>
 

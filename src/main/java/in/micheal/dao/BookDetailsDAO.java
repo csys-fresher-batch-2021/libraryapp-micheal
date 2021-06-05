@@ -1,5 +1,6 @@
 package in.micheal.dao;
 
+import in.micheal.constants.MessageConstants;
 import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.util.ConnectionUtil;
@@ -37,7 +38,7 @@ public class BookDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO ADD BOOK ");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -64,17 +65,17 @@ public class BookDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("bookname");
-				int bookquantity = rs.getInt(quantity);
+				String name = rs.getString("bookname");
+				int quants = rs.getInt(quantity);
 
 				BookDetail books = new BookDetail();
-				books.setName(bookname);
-				books.setQuantity(bookquantity);
+				books.setName(name);
+				books.setQuantity(quants);
 				searchResults.add(books);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO FIND BOOK");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 
 			ConnectionUtil.close(rs, pst, con);
@@ -105,7 +106,7 @@ public class BookDetailsDAO {
 
 			confirmation = true;
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO UPDATE BOOK");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}
@@ -133,17 +134,17 @@ public class BookDetailsDAO {
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String bookname = rs.getString("bookname");
-				int bookquantity = rs.getInt(quantity);
+				String name = rs.getString("bookname");
+				int quants = rs.getInt(quantity);
 
 				BookDetail books = new BookDetail();
-				books.setName(bookname);
-				books.setQuantity(bookquantity);
+				books.setName(name);
+				books.setQuantity(quants);
 				searchResults.add(books);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO SEARCH BOOKS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -175,7 +176,7 @@ public class BookDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO FIND QUANTITY");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 		}
@@ -200,7 +201,7 @@ public class BookDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO DELETE BOOKS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,26 +7,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="AdminHeader.jsp"></jsp:include>
+	<jsp:include page="AdminHeader.jsp"></jsp:include>
 	<main class="container-fluid">
-	
-	<h3>ALL RECORDS</h3><br><br>
+		<%
+		HttpSession AdminUser = request.getSession();
+		Long loggedInUsername = (Long) AdminUser.getAttribute("LOGGED_IN_USER");
+		if (loggedInUsername == null)
+			response.sendRedirect("AdminLogin.jsp");
+		%>
 
-<table class="table table-hover table-dark">
-<caption>Fined Users</caption>
-		<thead>
-			<tr>
-			<th scope="col">S.no</th>
-			<th scope="col">USER ID</th>
-			<th scope="col">FINE AMOUNT</th>
-			
-			</tr>
-		</thead>
-		<tbody id="allrecords"></tbody>	
-		
+		<h3>ALL RECORDS</h3>
+		<br>
+		<br>
+
+		<table class="table table-hover table-dark">
+			<caption>Fined Users</caption>
+			<thead>
+				<tr>
+					<th scope="col">S.no</th>
+					<th scope="col">USER ID</th>
+					<th scope="col">FINE AMOUNT</th>
+
+				</tr>
+			</thead>
+			<tbody id="allrecords"></tbody>
+
 		</table>
-		
-		</main>
+
+	</main>
 </body>
 <script>
 function viewFinedRecords(){

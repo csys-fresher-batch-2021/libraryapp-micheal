@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import in.micheal.constants.MessageConstants;
 import in.micheal.exception.DbException;
 import in.micheal.model.UserDetails;
 import in.micheal.util.ConnectionUtil;
@@ -35,7 +36,7 @@ public class UserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO ADD USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -67,7 +68,7 @@ public class UserDetailsDAO {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO FIND USER");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 
 			ConnectionUtil.close(rs, pst, con);
@@ -101,7 +102,7 @@ public class UserDetailsDAO {
 
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO FETCH DATAS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(rs, pst, con);
 
@@ -132,7 +133,7 @@ public class UserDetailsDAO {
 			pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DbException("UNABLE TO ADD ADMIN ");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -158,7 +159,7 @@ public class UserDetailsDAO {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			throw new DbException("UNABLE TO DELETE RECORDS");
+			throw new DbException(MessageConstants.ERROR_MESSAGE);
 		} finally {
 			ConnectionUtil.close(pst, con);
 		}
