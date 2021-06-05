@@ -23,13 +23,12 @@ public class PayFineAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			long userId = Long.parseLong(request.getParameter("userid"));
-			String bookName = (request.getParameter("bookname")).toUpperCase();
-			AdminService.payFine(userId, bookName);
-			String fineMsg = "RENEWED SUCCESSFULLY";
-			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?fineMsg=" + fineMsg);
+
+			String fineMsg = AdminService.payFine(userId);
+			RequestDispatcher rd = request.getRequestDispatcher("PayBill.jsp?fineMsg=" + fineMsg);
 			rd.forward(request, response);
 		} catch (NumberFormatException | DbException | ServletException | IOException e) {
-			RequestDispatcher rd = request.getRequestDispatcher("AdminView.jsp?errorMsg=" + e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("PayBill.jsp?errorMsg=" + e.getMessage());
 			try {
 				rd.forward(request, response);
 			} catch (ServletException | IOException e1) {

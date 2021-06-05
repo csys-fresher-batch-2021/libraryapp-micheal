@@ -1,11 +1,10 @@
 package in.micheal.service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
+import in.micheal.dao.DebtUsersFineDAO;
 import in.micheal.model.DebtUserDetail;
 import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
@@ -59,8 +58,26 @@ public class AdminService {
 	 * @param bookName
 	 * @throws DbException
 	 */
-	public static void payFine(long userId, String bookName) throws DbException {
-		Date date = Date.valueOf(LocalDate.now());
-		DebtUserDetailsDAO.updateDate(userId, date, bookName);
+	public static String payFine(long userId) throws DbException {
+		String confirmation;
+		Integer fineamount = DebtUsersFineDAO.getFineAmount(userId);
+		if (fineamount > 0) {
+			DebtUsersFineDAO.updateFineAmount(userId, 0);
+			confirmation = "FINE PAID SUCCESSFULLY";
+		} else {
+			confirmation = "USER DONT HAVE FINE OR USER ID DOESNT EXISTS";
+		}
+		return confirmation;
+
+	}
+
+	/**
+	 * This method is used to get all the data from the fined user data base
+	 * 
+	 * @return
+	 * @throws DbException
+	 */
+	public static List<DebtUserDetail> getAllFinedUser() throws DbException {
+		return DebtUsersFineDAO.getAll();
 	}
 }

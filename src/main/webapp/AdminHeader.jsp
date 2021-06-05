@@ -2,10 +2,6 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
-<%
-HttpSession loggedInUser = request.getSession();
-Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
-%>
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">LIBRARY MANAGEMENT</a>
@@ -15,32 +11,24 @@ Long loggedInUsername = (Long) loggedInUser.getAttribute("LOGGED_IN_USER");
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    
-    <%if(loggedInUsername==null)
-    {
-    %>
       <li class="nav-item active">
-        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="AdminView.jsp">UPLOAD BOOKS</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="SearchBooks.jsp">Search Books</a>
-      </li>
-    </ul>
-     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="UserLogin.jsp">Login</a>
-      <li class="nav-item active">
-        <a class="nav-link" href="AdminLogin.jsp">Admin Login</a>
+      <a class="nav-link" href="FinedUser.jsp">FINED USERS</a>
       </li>
-      </ul>      
-      <%} else{ %>
+      <li class="nav-item active">
+        <a class="nav-link" href="PayBill.jsp">PAY BILL</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="ViewRecords.jsp">VIEW RECORDS</a>
+      </li>
+      </ul>    
+      
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
       <a class="nav-link" href="LogOutAction">LOG OUT</a>
       </li>
       </ul>
-      
-      <%} %>
    
   </div>
 </nav>

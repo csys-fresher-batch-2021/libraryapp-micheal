@@ -6,6 +6,7 @@ import java.util.List;
 
 import in.micheal.dao.BookDetailsDAO;
 import in.micheal.dao.DebtUserDetailsDAO;
+import in.micheal.dao.DebtUsersFineDAO;
 import in.micheal.exception.DbException;
 import in.micheal.model.BookDetail;
 import in.micheal.model.DebtUserDetail;
@@ -29,32 +30,39 @@ public class CustomerService {
 	 * @throws DbException
 	 */
 	public static String takeBook(DebtUserDetail userobj) throws DbException {
+		boolean isFinedUser = DebtUserValidator.getFineAmount(userobj.getDebtUserId());
 		String verification = null;
-		int remainingBookInDB;
+		if (!isFinedUser) {
+			int remainingBookInDB;
 
-		remainingBookInDB = BookValidator.bookQuantityValidator(userobj.getTakenBook(), userobj.getTekenBookQuantity());
-		if (remainingBookInDB > 0) {
-			boolean confirmation;
+			remainingBookInDB = BookValidator.bookQuantityValidator(userobj.getTakenBook(),
+					userobj.getTekenBookQuantity());
+			if (remainingBookInDB > 0) {
+				boolean confirmation;
 
-			confirmation = DebtUserValidator.isDebtUser(userobj.getDebtUserId(), userobj.getTakenBook());
+				confirmation = DebtUserValidator.isDebtUser(userobj.getDebtUserId(), userobj.getTakenBook());
 
-			if (!confirmation) {
+				if (!confirmation) {
 
-				DebtUserDetailsDAO.addDebtUsers(userobj);
-				BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
+					DebtUserDetailsDAO.addDebtUsers(userobj);
+					BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
 
-				verification = "BOOK TAKEN SUCCESSFULLY";
+					verification = "BOOK TAKEN SUCCESSFULLY";
+				} else {
+
+					BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
+					int debtUserTakenBook = DebtUserDetailsDAO.getTakenBookQuantity(userobj.getDebtUserId(),
+							userobj.getTakenBook());
+					int remDebtBooks = userobj.getTekenBookQuantity() + debtUserTakenBook;
+					DebtUserDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remDebtBooks,
+							userobj.getDebtUserId());
+					verification = "BOOK TAKEN SUCCESSFULLY";
+				}
 			} else {
-
-				BookDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remainingBookInDB);
-				int debtUserTakenBook = DebtUserDetailsDAO.getTakenBookQuantity(userobj.getDebtUserId(),
-						userobj.getTakenBook());
-				int remDebtBooks = userobj.getTekenBookQuantity() + debtUserTakenBook;
-				DebtUserDetailsDAO.updateBookQuantity(userobj.getTakenBook(), remDebtBooks, userobj.getDebtUserId());
-				verification = "BOOK TAKEN SUCCESSFULLY";
+				verification = "SORRY INSUFFICIENT BOOK";
 			}
 		} else {
-			verification = "SORRY INSUFFICIENT BOOK";
+			verification = "PLEASE MEET THE ADMIN AND PAY THE FINE ";
 		}
 
 		return verification;
@@ -72,41 +80,36 @@ public class CustomerService {
 
 	public static String returnBook(DebtUserDetail userObj) throws DbException {
 		String confirmation = null;
-		long fineAmount = CustomerService.calculateFine(userObj.getDebtUserId(), userObj.getTakenBook());
-		if (fineAmount == 0) {
-			boolean isDebtUser = false;
-			int takenBookQuantity = 0;
+		boolean isDebtUser = false;
+		int takenBookQuantity = 0;
 
-			isDebtUser = DebtUserValidator.isDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
-			if (!isDebtUser) {
+		isDebtUser = DebtUserValidator.isDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+		if (!isDebtUser) {
 
-				confirmation = "YOU DIDNT TOOK THIS BOOK";
-			} else {
-
-				takenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userObj.getDebtUserId(),
-						userObj.getTakenBook());
-
-			}
-			int remainingBook = takenBookQuantity - userObj.getTekenBookQuantity();
-			if (remainingBook < 0) {
-				confirmation = "YOUR RETURNING TOO MUCH BOOKS";
-			} else if (remainingBook > 0) {
-				confirmation = "YOU RETURNED SOME BOOKS";
-				int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
-						+ userObj.getTekenBookQuantity();
-				BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
-				DebtUserDetailsDAO.updateBookQuantity(userObj.getTakenBook(), remainingBook, userObj.getDebtUserId());
-
-			} else if (remainingBook == 0) {
-				confirmation = "YOU RETURNED ALL BOOKS";
-				DebtUserDetailsDAO.deleteDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
-				int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
-						+ userObj.getTekenBookQuantity();
-				BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
-
-			}
+			confirmation = "YOU DIDNT TOOK THIS BOOK";
 		} else {
-			confirmation = "PLEASE PAY THE FINE FOR DELAYING THE RETURNING OF THE BOOKS";
+
+			takenBookQuantity = DebtUserDetailsDAO.getTakenBookQuantity(userObj.getDebtUserId(),
+					userObj.getTakenBook());
+
+		}
+		int remainingBook = takenBookQuantity - userObj.getTekenBookQuantity();
+		if (remainingBook < 0) {
+			confirmation = "YOUR RETURNING TOO MUCH BOOKS,NOT ACCEPTABLE";
+		} else if (remainingBook > 0) {
+			confirmation = "YOU RETURNED SOME BOOKS";
+			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+					+ userObj.getTekenBookQuantity();
+			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+			DebtUserDetailsDAO.updateBookQuantity(userObj.getTakenBook(), remainingBook, userObj.getDebtUserId());
+
+		} else if (remainingBook == 0) {
+			confirmation = "YOU RETURNED ALL BOOKS";
+			DebtUserDetailsDAO.deleteDebtUser(userObj.getDebtUserId(), userObj.getTakenBook());
+			int bookQuantityInBookDb = BookDetailsDAO.getBookQuantity(userObj.getTakenBook())
+					+ userObj.getTekenBookQuantity();
+			BookDetailsDAO.updateBookQuantity(userObj.getTakenBook(), bookQuantityInBookDb);
+
 		}
 		return confirmation;
 
@@ -145,27 +148,41 @@ public class CustomerService {
 		return debtBooks;
 	}
 
+
 	/**
-	 * This method is used to calculate fine amount of a indivduals
+	 * This method is used to calculate fin for debt users and automatically update
+	 * it to the databse
+	 * 
 	 * @param userId
-	 * @param bookName
-	 * @return
 	 * @throws DbException
 	 */
-	public static Long calculateFine(Long userId, String bookName) throws DbException {
-		String bookTakenDate = DebtUserDetailsDAO.getDate(userId, bookName).toString();
-		String currentDate = LocalDate.now().toString();
-		long fineAmount = 0;
+	public static void autoCalculateFine() throws DbException {
+		List<Long> allDebtUser = DebtUserDetailsDAO.getAllUser();
 
-		LocalDate takenDate = LocalDate.parse(bookTakenDate);
-		LocalDate currDate = LocalDate.parse(currentDate);
+		for (int i = 0; i < allDebtUser.size(); i++) {
+			long userId = allDebtUser.get(i);
+			List<DebtUserDetail> searchResults = DebtUserDetailsDAO.getDebtUserOfId(userId);
+			LocalDate currentDate = LocalDate.now();
+			int totalFine = 0;
+			for (DebtUserDetail obj : searchResults) {
+				long fineAmount = 0;
 
-		long noOfDaysBetween = ChronoUnit.DAYS.between(takenDate, currDate);
-		if (noOfDaysBetween > 3) {
-			Long fineDay = noOfDaysBetween - 3;
-			fineAmount = fineDay * DebtUserDetailsDAO.getTakenBookQuantity(userId, bookName) * 5;
+				long noOfDaysBetween = ChronoUnit.DAYS.between(LocalDate.parse(obj.getTakenDate().toString()),
+						currentDate);
+				if (noOfDaysBetween > 3) {
+					Long fineDay = noOfDaysBetween - 3;
+					fineAmount = fineDay * DebtUserDetailsDAO.getTakenBookQuantity(userId, obj.getTakenBook()) * 5;
+					totalFine += fineAmount;
+				}
+			}
+			boolean isFinedUser = DebtUserValidator.isFinedUser(userId);
+			if (!isFinedUser) {
+				DebtUsersFineDAO.putFineAmount(userId, totalFine);
+			} else {
+				DebtUsersFineDAO.updateFineAmount(userId, totalFine);
+			}
 		}
-		return fineAmount;
+
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import in.micheal.exception.DbException;
 import in.micheal.model.UserDetails;
+import in.micheal.service.CustomerService;
 import in.micheal.service.UserService;
 
 /**
@@ -20,6 +21,17 @@ import in.micheal.service.UserService;
 @WebServlet("/UserLoginAction")
 public class UserLoginAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void init() {
+
+		try {
+			CustomerService.autoCalculateFine();
+		} catch (DbException e2) {
+			e2.printStackTrace();
+		}
+
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {

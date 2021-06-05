@@ -7,6 +7,7 @@ public class DebtUserDetail {
 	private Date takenDate;
 	private String takenBook;
 	private int tekenBookQuantity;
+	private int fineAmount;
 
 	public long getDebtUserId() {
 		return debtUserId;
@@ -39,6 +40,14 @@ public class DebtUserDetail {
 
 	public void setTekenBookQuantity(int tekenBookQuantity) {
 		this.tekenBookQuantity = tekenBookQuantity;
+	}
+
+	public int getFineAmount() {
+		return fineAmount;
+	}
+
+	public void setFineAmount(int fineAmount) {
+		this.fineAmount = fineAmount;
 	}
 
 }
