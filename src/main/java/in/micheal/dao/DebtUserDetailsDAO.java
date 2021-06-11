@@ -257,7 +257,7 @@ public class DebtUserDetailsDAO {
 	 * @throws DbException
 	 * @throws ParseException
 	 */
-	public static List<DebtUserDetail> getAllRecords() throws DbException, ParseException {
+	public static List<DebtUserDetail> getAllRecords() throws DbException {
 
 		Connection con = null;
 		PreparedStatement pst = null;
