@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -252,8 +255,9 @@ public class DebtUserDetailsDAO {
 	 * 
 	 * @return
 	 * @throws DbException
+	 * @throws ParseException
 	 */
-	public static List<DebtUserDetail> getAllRecords() throws DbException {
+	public static List<DebtUserDetail> getAllRecords() throws DbException, ParseException {
 
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -270,11 +274,15 @@ public class DebtUserDetailsDAO {
 				Date takenDate = rs.getDate(MessageConstants.DATE);
 				int userId = rs.getInt(MessageConstants.USER_ID);
 
+				SimpleDateFormat obj = new SimpleDateFormat("dd-MMM-yyyy");
+				String strDate = obj.format(takenDate);
+
 				DebtUserDetail user = new DebtUserDetail();
 				user.setTakenBook(bookName);
 				user.setTekenBookQuantity(bookQuantity);
 				user.setDebtUserId(userId);
-				user.setTakenDate(takenDate);
+				user.setStrDate(strDate);
+
 				searchResults.add(user);
 			}
 

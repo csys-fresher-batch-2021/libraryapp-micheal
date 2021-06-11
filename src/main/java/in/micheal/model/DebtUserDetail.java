@@ -8,6 +8,7 @@ public class DebtUserDetail {
 	private String takenBook;
 	private int tekenBookQuantity;
 	private int fineAmount;
+	private String strDate;
 
 	public long getDebtUserId() {
 		return debtUserId;
@@ -48,6 +49,14 @@ public class DebtUserDetail {
 
 	public void setFineAmount(int fineAmount) {
 		this.fineAmount = fineAmount;
+	}
+
+	public String getStrDate() {
+		return strDate;
+	}
+
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
 	}
 
 }

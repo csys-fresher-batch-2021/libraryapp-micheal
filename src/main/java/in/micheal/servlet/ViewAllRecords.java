@@ -2,6 +2,7 @@ package in.micheal.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ViewAllRecords extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(json);
 			out.flush();
-		} catch (DbException | IOException e) {
+		} catch (DbException | IOException | ParseException e) {
 			e.printStackTrace();
 		}
 

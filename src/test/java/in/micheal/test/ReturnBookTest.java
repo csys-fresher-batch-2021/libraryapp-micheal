@@ -119,7 +119,7 @@ public class ReturnBookTest {
 
 			confirmation = CustomerService.returnBook(returningUser);
 
-			assertEquals("YOUR RETURNING TOO MUCH BOOKS", confirmation);
+			assertEquals("YOUR RETURNING TOO MUCH BOOKS,NOT ACCEPTABLE", confirmation);
 
 			BookDetailsDAO.deleteAllRecords();
 
