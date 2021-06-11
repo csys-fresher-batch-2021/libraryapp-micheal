@@ -40,6 +40,7 @@
 		</table>
 		
 		</main>
+		
 </body>
 
 <script>
@@ -53,7 +54,7 @@ function viewAllRecords(){
 				i++;
 				content += "<tr><td>" + i + "</td><td>" + user.debtUserId +
 				"</td><td>" + user.takenBook + "</td><td>" + user.tekenBookQuantity + 
-				"</td><td>" + user.takenDate + "</td></tr>";
+				"</td><td>" + user.strDate + "</td></tr>";
 			}
 		document.querySelector("#allrecords").innerHTML= content;
 	});

@@ -1,5 +1,6 @@
 package in.micheal.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import in.micheal.dao.BookDetailsDAO;
@@ -45,8 +46,9 @@ public class AdminService {
 	 * 
 	 * @return
 	 * @throws DbException
+	 * @throws ParseException 
 	 */
-	public static List<DebtUserDetail> getAllDebtRecords() throws DbException {
+	public static List<DebtUserDetail> getAllDebtRecords() throws DbException, ParseException {
 		return DebtUserDetailsDAO.getAllRecords();
 
 	}
